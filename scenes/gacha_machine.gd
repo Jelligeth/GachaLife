@@ -15,15 +15,18 @@ signal took_ball
 var got_ball: RigidBody2D
 var can_turn: bool = true
 var turning: bool = false
+var ball_count: int = 0
 
 func _ready() -> void:
 	knob.rotation = 0
 	can_turn = true
 
 func spawn_balls(amount: int) -> void:
-	for i in amount:
+	ball_count = amount
+	for i in ball_count:
 		got_ball = ball_scene.instantiate()
 		ball_node.add_child(got_ball)
+		got_ball.rotate(randf_range(0, PI*2))
 		await get_tree().create_timer(0.1).timeout
 	got_ball = null
 
@@ -49,6 +52,10 @@ func empty() -> void:
 	for ball in balls:
 		ball.queue_free()
 
+func reset_level() -> void:
+	empty()
+	spawn_balls(ball_count)
+
 func _on_gacha_knob_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not turning and event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		if not got_ball and can_turn:
@@ -60,7 +67,13 @@ func _on_hole_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 	if got_ball and event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		took_ball.emit()
 		got_ball.queue_free()
+		ball_count -= 1
 		got_ball = null
 
-func _on_hole_body_entered(body: Node2D) -> void:
-	got_ball = body
+func _on_reset_level_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		reset_level()
+
+func _on_guts_ball_body_entered(body: Node2D) -> void:
+	if body is Ball:
+		got_ball = body

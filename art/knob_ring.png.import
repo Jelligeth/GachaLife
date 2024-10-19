@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://w1n1eiib6hyo"
-path="res://.godot/imported/hole.png-9fe1931412d2dc77d3f3ab3e2235f8d7.ctex"
+uid="uid://co01nhcbte86k"
+path="res://.godot/imported/knob_ring.png-f40ec090e22f41c4f015911e6003bbdf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/hole.png"
-dest_files=["res://.godot/imported/hole.png-9fe1931412d2dc77d3f3ab3e2235f8d7.ctex"]
+source_file="res://art/knob_ring.png"
+dest_files=["res://.godot/imported/knob_ring.png-f40ec090e22f41c4f015911e6003bbdf.ctex"]
 
 [params]
 

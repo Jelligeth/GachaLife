@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vaoytb1x1ssy"
-path="res://.godot/imported/gacha.png-64942f2b8de7dbfaeeb5f14f2ae8a045.ctex"
+uid="uid://c2mofn4flw6fh"
+path="res://.godot/imported/machine_back.png-620281fe3b544be327d7d9bf666b05b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/gacha.png"
-dest_files=["res://.godot/imported/gacha.png-64942f2b8de7dbfaeeb5f14f2ae8a045.ctex"]
+source_file="res://art/machine_back.png"
+dest_files=["res://.godot/imported/machine_back.png-620281fe3b544be327d7d9bf666b05b8.ctex"]
 
 [params]
 

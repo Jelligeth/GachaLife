@@ -1,13 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpls863ho1na2"]
+[gd_scene load_steps=8 format=3 uid="uid://bpls863ho1na2"]
 
 [ext_resource type="Script" path="res://scenes/game_controller.gd" id="1_4h8s8"]
 [ext_resource type="PackedScene" uid="uid://bmvoe16fod6s1" path="res://scenes/UI.tscn" id="1_83iu1"]
 [ext_resource type="PackedScene" uid="uid://kwjhw0keyw5v" path="res://scenes/gacha_machine.tscn" id="2_4dilj"]
 [ext_resource type="JSON" path="res://scripts/gacha_list.json" id="2_7jf06"]
 
-[sub_resource type="Environment" id="Environment_i6nbd"]
-background_mode = 1
-background_color = Color(0.92549, 0.901961, 0.921569, 1)
+[sub_resource type="QuadMesh" id="QuadMesh_86ujc"]
+size = Vector2(3240, 2000)
+
+[sub_resource type="Gradient" id="Gradient_aojr1"]
+colors = PackedColorArray(0.921569, 0.921569, 0.921569, 1, 0.921569, 0.921569, 0.921569, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_unhlr"]
+gradient = SubResource("Gradient_aojr1")
 
 [node name="GameController" type="Node2D" node_paths=PackedStringArray("ui", "gacha_machine")]
 script = ExtResource("1_4h8s8")
@@ -17,9 +22,10 @@ gacha_machine = NodePath("GachaMachine")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("1_83iu1")]
 
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("QuadMesh_86ujc")
+texture = SubResource("GradientTexture1D_unhlr")
+
 [node name="GachaMachine" parent="." instance=ExtResource("2_4dilj")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_i6nbd")

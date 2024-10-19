@@ -1,13 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://kwjhw0keyw5v"]
+[gd_scene load_steps=14 format=3 uid="uid://kwjhw0keyw5v"]
 
-[ext_resource type="Texture2D" uid="uid://dc1h4cq6rq42y" path="res://art/machine.png" id="1_mm0s8"]
+[ext_resource type="Texture2D" uid="uid://c2mofn4flw6fh" path="res://art/machine_back.png" id="1_bebtx"]
 [ext_resource type="Script" path="res://scenes/gacha_machine.gd" id="2_pa0j3"]
 [ext_resource type="PackedScene" uid="uid://cvo3meclslhtm" path="res://scenes/gacha_ball.tscn" id="3_xv6nv"]
-[ext_resource type="Texture2D" uid="uid://vaoytb1x1ssy" path="res://art/gacha.png" id="4_me0y4"]
-[ext_resource type="Texture2D" uid="uid://w1n1eiib6hyo" path="res://art/hole.png" id="5_jl1gi"]
+[ext_resource type="Texture2D" uid="uid://ddxa786mjgd3r" path="res://art/machine_front.png" id="4_vygrh"]
+[ext_resource type="Texture2D" uid="uid://co01nhcbte86k" path="res://art/knob_ring.png" id="5_e1eh2"]
+[ext_resource type="Texture2D" uid="uid://e5llv3gshnu8" path="res://art/knob.png" id="6_wrmun"]
+[ext_resource type="FontFile" uid="uid://1v3ervj5rdy8" path="res://art/zen_maru_gothic/ZenMaruGothic-Black.ttf" id="7_i4u66"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y0c1j"]
-radius = 100.0
+radius = 120.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4nx25"]
+friction = 0.1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d5vlb"]
+radius = 50.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7whlx"]
 friction = 0.0
@@ -15,49 +23,88 @@ friction = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ngg7"]
 radius = 125.0
 
-[node name="GachaMachine" type="Sprite2D" node_paths=PackedStringArray("ball_node", "hole", "knob", "ball_detector")]
-texture = ExtResource("1_mm0s8")
+[sub_resource type="CircleShape2D" id="CircleShape2D_sc1v5"]
+radius = 50.0
+
+[node name="GachaMachine" type="Sprite2D" node_paths=PackedStringArray("ball_node", "knob", "ball_detector")]
+texture = ExtResource("1_bebtx")
 script = ExtResource("2_pa0j3")
 ball_scene = ExtResource("3_xv6nv")
 ball_node = NodePath("Balls")
-hole = NodePath("Hole/Sprite2D")
 knob = NodePath("GachaKnob")
 ball_detector = NodePath("Hole")
 
 [node name="Hole" type="Area2D" parent="."]
 position = Vector2(311, 599)
 
-[node name="Sprite2D" type="Sprite2D" parent="Hole"]
-texture = ExtResource("5_jl1gi")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
+position = Vector2(-609, -40)
 shape = SubResource("CircleShape2D_y0c1j")
 
 [node name="Balls" type="Node2D" parent="."]
-position = Vector2(0, -400)
+position = Vector2(0, -500)
 
 [node name="Guts" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_4nx25")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Guts"]
-polygon = PackedVector2Array(36, 45, -497, 27, -502, -560, 512, -557, 506, 36, 467, 54, 439, 95, 428, 146, 438.615, 693.345, 306, 734, 305, 776, 573, 783, 584, -660, -616, -670, -593, 772, 300, 776, 300, 734, 178.885, 681.986, 172, 154, 144, 91, 87, 54)
+polygon = PackedVector2Array(-394, 15, -463, -19, -490, -97, -492, -640, -416, -767, 414, -759, 479, -609, 495, -154, 482, -67, 428, 5, 301, 34, 147, 75, 248, 205, 279, 337, 221, 475, 66, 554, -68, 552, -164, 467, -167, 599, -225, 684, -325, 702, -302, 771, 573, 783, 588, -872, -619, -870, -593, 772, -306, 772, -330, 700, -419, 627, -427, 559, -387, 345, -299, 219, -156, 76, -226, 43)
+
+[node name="GutsBall" type="Area2D" parent="Guts"]
+position = Vector2(-200, 350)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Guts/GutsBall"]
+shape = SubResource("CircleShape2D_d5vlb")
+
+[node name="Cover" type="Sprite2D" parent="."]
+texture = ExtResource("4_vygrh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 300)
+texture = ExtResource("5_e1eh2")
 
 [node name="GachaKnob" type="Area2D" parent="."]
-position = Vector2(300, 200)
+position = Vector2(0, 300)
+rotation = 1.5708
 
 [node name="Sprite2D" type="Sprite2D" parent="GachaKnob"]
-texture = ExtResource("4_me0y4")
+texture = ExtResource("6_wrmun")
 
 [node name="KnobMechanism" type="StaticBody2D" parent="GachaKnob"]
 physics_material_override = SubResource("PhysicsMaterial_7whlx")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GachaKnob/KnobMechanism"]
-polygon = PackedVector2Array(-125, 51, -130, -27, -108, -85, -3, -138, 99, -97, 130, -35, 123, 50, 111, -19, 70, -85, -2, -115, -87, -73, -110, 4)
+rotation = 1.5708
+polygon = PackedVector2Array(-62, -243, 88, -248, 171, -213, 228, -89, 233, 57, 184.259, 116.913, 127, 164, 110, 63, 45, -9, -48, -19, -128, 29, -157, 106, -156, 218, -213, 146, -219, 36, -216, -158)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GachaKnob"]
 shape = SubResource("CircleShape2D_7ngg7")
 
-[connection signal="body_entered" from="Hole" to="." method="_on_hole_body_entered"]
+[node name="ResetLevel" type="Area2D" parent="."]
+position = Vector2(345, 375)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ResetLevel"]
+shape = SubResource("CircleShape2D_sc1v5")
+
+[node name="Label" type="Label" parent="ResetLevel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = 30.0
+offset_right = 76.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.0941176, 0.203922, 0.529412, 1)
+theme_override_fonts/font = ExtResource("7_i4u66")
+theme_override_font_sizes/font_size = 40
+text = "RESET"
+horizontal_alignment = 1
+
 [connection signal="input_event" from="Hole" to="." method="_on_hole_input_event"]
+[connection signal="body_entered" from="Guts/GutsBall" to="." method="_on_guts_ball_body_entered"]
 [connection signal="input_event" from="GachaKnob" to="." method="_on_gacha_knob_input_event"]
+[connection signal="input_event" from="ResetLevel" to="." method="_on_reset_level_input_event"]

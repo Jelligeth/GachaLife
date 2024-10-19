@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://lmdujtfpll6q"]
+
+[ext_resource type="Script" path="res://scenes/list_element.gd" id="1_dsny7"]
+[ext_resource type="Texture2D" uid="uid://nbjytrs52v03" path="res://art/ball.png" id="2_cwyo7"]
+
+[node name="ListElement" type="HBoxContainer" node_paths=PackedStringArray("label")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_dsny7")
+label = NodePath("LockedElement")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+texture = ExtResource("2_cwyo7")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="LockedElement" type="Label" parent="."]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+text = "A long description of something to check if it'll fit in the box"
+autowrap_mode = 2

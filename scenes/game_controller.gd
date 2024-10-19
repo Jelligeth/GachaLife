@@ -9,7 +9,7 @@ var level_arrays: Array = []
 var level_index: int = 0
 var gacha_array: Array = []
 
-var coins: int = 1
+var coins: int = 10
 
 var level_label: String = ""
 var level_result: String = ""
@@ -29,7 +29,7 @@ func set_level() -> void:
 	level_label = level_arrays[level_index][0]
 	gacha_array = level_arrays[level_index][1]
 	gacha_machine.empty()
-	gacha_machine.spawn_balls(gacha_array.size())
+	await gacha_machine.spawn_balls(gacha_array.size())
 	update_coins(1)
 	ui.disable_discard_button(false)
 	level_index += 1

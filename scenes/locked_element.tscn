@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://lmdujtfpll6q"]
-
-[node name="LockedElement" type="Label"]
-custom_minimum_size = Vector2(900, 0)
-text = "A long description of something to check if it'll fit in the box"
-autowrap_mode = 2
