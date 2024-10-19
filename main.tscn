@@ -1,0 +1,360 @@
+[gd_scene load_steps=16 format=3 uid="uid://bpls863ho1na2"]
+
+[ext_resource type="FontFile" uid="uid://b84xxkjqgnklu" path="res://mochiy_pop_one/MochiyPopOne-Regular.ttf" id="1_towce"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5o4a5"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.34902, 0.580392, 0.788235, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yyqo"]
+bg_color = Color(0.969612, 0.959752, 0.962664, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bp6it"]
+bg_color = Color(0.705882, 0.878431, 0.866667, 0.403922)
+
+[sub_resource type="Theme" id="Theme_8ljlt"]
+Button/font_sizes/font_size = 42
+Button/fonts/font = ExtResource("1_towce")
+Button/styles/normal = SubResource("StyleBoxFlat_5o4a5")
+FlowContainer/constants/h_separation = 20
+FlowContainer/constants/v_separation = 20
+Label/colors/font_color = Color(0, 0.408334, 0.751805, 1)
+Label/font_sizes/font_size = 64
+MarginContainer/constants/margin_bottom = 50
+MarginContainer/constants/margin_left = 50
+MarginContainer/constants/margin_right = 50
+MarginContainer/constants/margin_top = 50
+Panel/styles/panel = SubResource("StyleBoxFlat_6yyqo")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_bp6it")
+RichTextLabel/colors/default_color = Color(0.771022, 0.105171, 0.162791, 1)
+RichTextLabel/font_sizes/normal_font_size = 100
+RichTextLabel/fonts/normal_font = ExtResource("1_towce")
+VBoxContainer/constants/separation = 30
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c5ykb"]
+size = Vector2(1100, 1200)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rjl1i"]
+size = Vector2(1024, 512)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ccrjb"]
+radius = 100.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_f4jpo"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mppwp"]
+size = Vector2(300, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yu3kf"]
+size = Vector2(300, 50)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hd6wr"]
+size = Vector2(512, 512)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4tw7k"]
+size = Vector2(256, 256)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ncfnx"]
+size = Vector2(512, 400)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uy78a"]
+size = Vector2(1024, 1024)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8ljlt")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.971289, 0.962178, 0.964692, 1)
+
+[node name="GachaMachines" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LockedIn" type="MarginContainer" parent="GachaMachines"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 150.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GachaMachines/LockedIn"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GachaMachines/LockedIn/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GachaMachines/LockedIn/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "LOCKED IN"
+fit_content = true
+
+[node name="Label" type="Label" parent="GachaMachines/LockedIn/VBoxContainer"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+text = "A long description of something to check if it'll fit in the box"
+autowrap_mode = 2
+
+[node name="GachaMachines" type="VBoxContainer" parent="GachaMachines"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_right = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GachaMachine" type="PanelContainer" parent="GachaMachines/GachaMachines"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GachaMachines/GachaMachines/GachaMachine"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_c5ykb")
+
+[node name="FlowContainer" type="HFlowContainer" parent="GachaMachines/GachaMachines/GachaMachine"]
+layout_mode = 2
+alignment = 1
+
+[node name="BallContainer" type="MarginContainer" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer"]
+layout_mode = 2
+
+[node name="Window" type="TextureRect" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/BallContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_rjl1i")
+
+[node name="GachaBall" type="RigidBody2D" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/BallContainer"]
+position = Vector2(511, 305)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/BallContainer/GachaBall"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_ccrjb")
+
+[node name="TextureRect" type="TextureRect" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/BallContainer/GachaBall"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_f4jpo")
+
+[node name="CollisionBoxes" type="StaticBody2D" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/BallContainer"]
+position = Vector2(566, 569)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/BallContainer/CollisionBoxes"]
+position = Vector2(300, 0)
+shape = SubResource("RectangleShape2D_mppwp")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/BallContainer/CollisionBoxes"]
+polygon = PackedVector2Array(166, -29, -546, -152, -545, -484, 539, -485, 537, -96, 434, -27, 435, 67, 596, 70, 596, -583, -624, -583, -624, 74, 163, 79)
+
+[node name="GateDetection" type="Area2D" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/BallContainer/CollisionBoxes"]
+position = Vector2(300, 40)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/BallContainer/CollisionBoxes/GateDetection"]
+shape = SubResource("RectangleShape2D_yu3kf")
+
+[node name="TextureRect" type="TextureRect" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_hd6wr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/VBoxContainer"]
+layout_mode = 2
+text = "GACHA!"
+icon = SubResource("PlaceholderTexture2D_4tw7k")
+
+[node name="Hole" type="TextureRect" parent="GachaMachines/GachaMachines/GachaMachine/FlowContainer/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_ncfnx")
+
+[node name="Rerolling" type="MarginContainer" parent="GachaMachines"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1028.0
+offset_right = -4.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Reroll" type="VBoxContainer" parent="GachaMachines/Rerolling"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="GachaMachines/Rerolling/Reroll"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Counter" type="RichTextLabel" parent="GachaMachines/Rerolling/Reroll/MarginContainer"]
+layout_mode = 2
+text = "30"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RerollButton" type="Button" parent="GachaMachines/Rerolling/Reroll"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "DISCARD &
+TRY AGAIN"
+
+[node name="PrizeElement" type="MarginContainer" parent="GachaMachines"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -562.0
+offset_bottom = 562.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="GachaMachines/PrizeElement"]
+layout_mode = 2
+color = Color(0.87451, 0.835294, 0.847059, 1)
+
+[node name="HboxContainer" type="HBoxContainer" parent="GachaMachines/PrizeElement"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GachaMachines/PrizeElement/HboxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_uy78a")
+
+[node name="PanelContainer" type="PanelContainer" parent="GachaMachines/PrizeElement/HboxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="GachaMachines/PrizeElement/HboxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GachaMachines/PrizeElement/HboxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="GachaMachines/PrizeElement/HboxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="GachaMachines/PrizeElement/HboxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GachaMachines/PrizeElement/HboxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GachaMachines/PrizeElement/HboxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+text = "This is what you got"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GachaMachines/PrizeElement/HboxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonLock" type="Button" parent="GachaMachines/PrizeElement/HboxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LOCK
+IT IN"
+
+[node name="ButtonDiscard" type="Button" parent="GachaMachines/PrizeElement/HboxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "THROW
+IT AWAY"
+
+[node name="TextureRect2" type="TextureRect" parent="GachaMachines/PrizeElement/HboxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_uy78a")
+flip_h = true
+
+[node name="StartMenu" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="StartMenu"]
+layout_mode = 2
+color = Color(0.925925, 0.902137, 0.921803, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "GATCHA LIFE!"
+fit_content = true
+
+[node name="Label" type="Label" parent="StartMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Each level, draw gatchas until you're satisfied with what you got
+"
+
+[node name="Label2" type="Label" parent="StartMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "You only get to keep one gatcha per level
+"
+
+[node name="Label3" type="Label" parent="StartMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "You get one reroll per level, and 20 reroll tokens
+"
+
+[node name="Button" type="Button" parent="StartMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "BEGIN"
+
+[connection signal="pressed" from="StartMenu/VBoxContainer/Button" to="StartMenu" method="hide"]
