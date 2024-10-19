@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b84xxkjqgnklu"
-path="res://.godot/imported/MochiyPopOne-Regular.ttf-a8de176b4fc3ad6dde512c475d33d470.fontdata"
+uid="uid://t7foldnuju1y"
+path="res://.godot/imported/ZenMaruGothic-Light.ttf-dbba617f6244dec9c400936550df334a.fontdata"
 
 [deps]
 
-source_file="res://mochiy_pop_one/MochiyPopOne-Regular.ttf"
-dest_files=["res://.godot/imported/MochiyPopOne-Regular.ttf-a8de176b4fc3ad6dde512c475d33d470.fontdata"]
+source_file="res://art/zen_maru_gothic/ZenMaruGothic-Light.ttf"
+dest_files=["res://.godot/imported/ZenMaruGothic-Light.ttf-dbba617f6244dec9c400936550df334a.fontdata"]
 
 [params]
 

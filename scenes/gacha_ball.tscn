@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvo3meclslhtm"]
+[gd_scene load_steps=4 format=3 uid="uid://cvo3meclslhtm"]
 
 [ext_resource type="Texture2D" uid="uid://nbjytrs52v03" path="res://art/ball.png" id="1_cfdog"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x030b"]
+friction = 0.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ccrjb"]
-radius = 64.0
+radius = 90.0
 
 [node name="GachaBall" type="RigidBody2D"]
-position = Vector2(0, -200)
+physics_material_override = SubResource("PhysicsMaterial_x030b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ccrjb")

@@ -3,12 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://dc1h4cq6rq42y" path="res://art/machine.png" id="1_mm0s8"]
 [ext_resource type="Script" path="res://scenes/gacha_machine.gd" id="2_pa0j3"]
 [ext_resource type="PackedScene" uid="uid://cvo3meclslhtm" path="res://scenes/gacha_ball.tscn" id="3_xv6nv"]
-[ext_resource type="JSON" path="res://scripts/gacha_list.json" id="4_5blwc"]
 [ext_resource type="Texture2D" uid="uid://vaoytb1x1ssy" path="res://art/gacha.png" id="4_me0y4"]
 [ext_resource type="Texture2D" uid="uid://w1n1eiib6hyo" path="res://art/hole.png" id="5_jl1gi"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jsrph"]
-radius = 128.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_y0c1j"]
+radius = 100.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7whlx"]
+friction = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ngg7"]
 radius = 125.0
@@ -17,39 +19,45 @@ radius = 125.0
 texture = ExtResource("1_mm0s8")
 script = ExtResource("2_pa0j3")
 ball_scene = ExtResource("3_xv6nv")
-gacha_list = ExtResource("4_5blwc")
-ball_node = NodePath("GachaBalls")
-hole = NodePath("Hole")
+ball_node = NodePath("Balls")
+hole = NodePath("Hole/Sprite2D")
 knob = NodePath("GachaKnob")
-ball_detector = NodePath("GachaWindow/BallDetector")
+ball_detector = NodePath("Hole")
 
-[node name="GachaBalls" type="Node2D" parent="."]
-position = Vector2(0, -400)
-
-[node name="GachaWindow" type="Node2D" parent="."]
-
-[node name="Boundaries" type="StaticBody2D" parent="GachaWindow"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GachaWindow/Boundaries"]
-polygon = PackedVector2Array(171, 95, -497, 27, -502, -560, 512, -557, 506, 39, 428, 98, 429, 185, 586, 188, 584, -660, -616, -670, -623, 195, 170, 190)
-
-[node name="BallDetector" type="Area2D" parent="GachaWindow"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="GachaWindow/BallDetector"]
-position = Vector2(300, 300)
-shape = SubResource("CircleShape2D_jsrph")
-
-[node name="Hole" type="Sprite2D" parent="."]
+[node name="Hole" type="Area2D" parent="."]
 position = Vector2(311, 599)
+
+[node name="Sprite2D" type="Sprite2D" parent="Hole"]
 texture = ExtResource("5_jl1gi")
 
-[node name="FrontPanel" type="Sprite2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
+shape = SubResource("CircleShape2D_y0c1j")
+
+[node name="Balls" type="Node2D" parent="."]
+position = Vector2(0, -400)
+
+[node name="Guts" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Guts"]
+polygon = PackedVector2Array(36, 45, -497, 27, -502, -560, 512, -557, 506, 36, 467, 54, 439, 95, 428, 146, 438.615, 693.345, 306, 734, 305, 776, 573, 783, 584, -660, -616, -670, -593, 772, 300, 776, 300, 734, 178.885, 681.986, 172, 154, 144, 91, 87, 54)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="GachaKnob" type="Area2D" parent="."]
-position = Vector2(300, 300)
+position = Vector2(300, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="GachaKnob"]
+texture = ExtResource("4_me0y4")
+
+[node name="KnobMechanism" type="StaticBody2D" parent="GachaKnob"]
+physics_material_override = SubResource("PhysicsMaterial_7whlx")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GachaKnob/KnobMechanism"]
+polygon = PackedVector2Array(-125, 51, -130, -27, -108, -85, -3, -138, 99, -97, 130, -35, 123, 50, 111, -19, 70, -85, -2, -115, -87, -73, -110, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GachaKnob"]
 shape = SubResource("CircleShape2D_7ngg7")
 
-[node name="Sprite2D" type="Sprite2D" parent="GachaKnob"]
-texture = ExtResource("4_me0y4")
+[connection signal="body_entered" from="Hole" to="." method="_on_hole_body_entered"]
+[connection signal="input_event" from="Hole" to="." method="_on_hole_input_event"]
+[connection signal="input_event" from="GachaKnob" to="." method="_on_gacha_knob_input_event"]

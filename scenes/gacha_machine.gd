@@ -1,48 +1,66 @@
 extends Sprite2D
+class_name GachaMachine
+
+signal turned_knob
+signal took_ball
 
 @export var ball_scene: PackedScene
-@export var gacha_list: JSON
+
 @export_category("Scene Nodes")
 @export var ball_node: Node2D
 @export var hole: Node2D
 @export var knob: Area2D
 @export var ball_detector: Area2D
 
-var level_arrays: Array = []
-
-var level_index: int = 0
-var level_name: String = ""
-var gacha_array: Array = []
-
-var ball: RigidBody2D
+var got_ball: RigidBody2D
+var can_turn: bool = true
+var turning: bool = false
 
 func _ready() -> void:
-	load_list()
-	knob.input_event.connect(turn_knob)
-	ball_detector.body_entered.connect(got_ball)
+	knob.rotation = 0
+	can_turn = true
 
-func load_list() -> void:
-	level_arrays = gacha_list.data
-	set_level()
-
-func set_level() -> void:
-	level_name = level_arrays[level_index][0]
-	gacha_array = level_arrays[level_index][1]
-	spawn_balls()
-	level_index += 1
-
-func spawn_balls() -> void:
-	for item in gacha_array:
-		var ball = ball_scene.instantiate()
-		ball_node.add_child(ball)
+func spawn_balls(amount: int) -> void:
+	for i in amount:
+		got_ball = ball_scene.instantiate()
+		ball_node.add_child(got_ball)
 		await get_tree().create_timer(0.1).timeout
+	got_ball = null
 
-func turn_knob(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
-		var tween = create_tween()
-		tween.tween_property(knob,"rotation", 180, 1)
+func turn_knob() -> void:
+	turning = true
+	if knob.rotation == 0:
+		turned_knob.emit()
+	var tween = create_tween()
+	tween.tween_property(knob,"rotation", knob.rotation + PI/2, 0.5)
+	await tween.finished
+	if floori(knob.rotation) >= floori(2*PI):
+		knob.rotation = 0
+	turning = false
 
-func got_ball(body) -> void:
-	ball = body
-	ball.set_physics_process(false)
-	ball.global_position = hole.global_position
+func wiggle() -> void:
+	var tween = create_tween()
+	tween.tween_property(knob, "rotation", PI*0.05, 0.1)
+	await tween.finished
+	knob.rotation = 0
+
+func empty() -> void:
+	var balls = ball_node.get_children()
+	for ball in balls:
+		ball.queue_free()
+
+func _on_gacha_knob_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if not turning and event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		if not got_ball and can_turn:
+			turn_knob()
+		else:
+			wiggle()
+
+func _on_hole_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if got_ball and event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		took_ball.emit()
+		got_ball.queue_free()
+		got_ball = null
+
+func _on_hole_body_entered(body: Node2D) -> void:
+	got_ball = body

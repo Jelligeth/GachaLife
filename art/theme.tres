@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://tiki8lc6ldfh"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://tiki8lc6ldfh"]
 
-[ext_resource type="FontFile" uid="uid://b84xxkjqgnklu" path="res://mochiy_pop_one/MochiyPopOne-Regular.ttf" id="1_8m3uo"]
+[ext_resource type="FontFile" uid="uid://b84xxkjqgnklu" path="res://art/mochiy_pop_one/MochiyPopOne-Regular.ttf" id="1_l3vou"]
+[ext_resource type="FontFile" uid="uid://b4xr64nyem3md" path="res://art/zen_maru_gothic/ZenMaruGothic-Regular.ttf" id="2_o1iw4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5o4a5"]
 content_margin_left = 20.0
@@ -21,12 +22,13 @@ bg_color = Color(0.705882, 0.878431, 0.866667, 0.403922)
 
 [resource]
 Button/font_sizes/font_size = 42
-Button/fonts/font = ExtResource("1_8m3uo")
+Button/fonts/font = ExtResource("1_l3vou")
 Button/styles/normal = SubResource("StyleBoxFlat_5o4a5")
 FlowContainer/constants/h_separation = 20
 FlowContainer/constants/v_separation = 20
 Label/colors/font_color = Color(0, 0.408334, 0.751805, 1)
-Label/font_sizes/font_size = 64
+Label/font_sizes/font_size = 50
+Label/fonts/font = ExtResource("2_o1iw4")
 MarginContainer/constants/margin_bottom = 50
 MarginContainer/constants/margin_left = 50
 MarginContainer/constants/margin_right = 50
@@ -35,5 +37,5 @@ Panel/styles/panel = SubResource("StyleBoxFlat_6yyqo")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_bp6it")
 RichTextLabel/colors/default_color = Color(0.771022, 0.105171, 0.162791, 1)
 RichTextLabel/font_sizes/normal_font_size = 100
-RichTextLabel/fonts/normal_font = ExtResource("1_8m3uo")
+RichTextLabel/fonts/normal_font = ExtResource("1_l3vou")
 VBoxContainer/constants/separation = 30
