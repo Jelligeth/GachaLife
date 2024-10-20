@@ -1,8 +1,40 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://tiki8lc6ldfh"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://tiki8lc6ldfh"]
 
-[ext_resource type="FontFile" uid="uid://b84xxkjqgnklu" path="res://art/mochiy_pop_one/MochiyPopOne-Regular.ttf" id="1_l3vou"]
 [ext_resource type="FontFile" uid="uid://b4xr64nyem3md" path="res://art/zen_maru_gothic/ZenMaruGothic-Regular.ttf" id="2_o1iw4"]
 [ext_resource type="FontFile" uid="uid://1v3ervj5rdy8" path="res://art/zen_maru_gothic/ZenMaruGothic-Black.ttf" id="3_qil1g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_atmir"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.0941176, 0.203922, 0.529412, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqis8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4vwe"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.619608, 0.796078, 0.894118, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.0941176, 0.203922, 0.529412, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5o4a5"]
 content_margin_left = 20.0
@@ -10,6 +42,27 @@ content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(0.34902, 0.580392, 0.788235, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.0941176, 0.203922, 0.529412, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q2dlu"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.419608, 0.592157, 0.690196, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.0941176, 0.203922, 0.529412, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -17,6 +70,11 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yyqo"]
 bg_color = Color(0.921569, 0.921569, 0.921569, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.0941176, 0.203922, 0.529412, 1)
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
@@ -27,11 +85,15 @@ bg_color = Color(0.705882, 0.878431, 0.866667, 0.403922)
 
 [resource]
 Button/font_sizes/font_size = 42
-Button/fonts/font = ExtResource("1_l3vou")
+Button/fonts/font = ExtResource("3_qil1g")
+Button/styles/disabled = SubResource("StyleBoxFlat_atmir")
+Button/styles/focus = SubResource("StyleBoxEmpty_kqis8")
+Button/styles/hover = SubResource("StyleBoxFlat_w4vwe")
 Button/styles/normal = SubResource("StyleBoxFlat_5o4a5")
+Button/styles/pressed = SubResource("StyleBoxFlat_q2dlu")
 FlowContainer/constants/h_separation = 20
 FlowContainer/constants/v_separation = 20
-Label/colors/font_color = Color(0, 0.408334, 0.751805, 1)
+Label/colors/font_color = Color(0.0941176, 0.203922, 0.529412, 1)
 Label/font_sizes/font_size = 50
 Label/fonts/font = ExtResource("2_o1iw4")
 MarginContainer/constants/margin_bottom = 50
@@ -40,7 +102,9 @@ MarginContainer/constants/margin_right = 50
 MarginContainer/constants/margin_top = 50
 Panel/styles/panel = SubResource("StyleBoxFlat_6yyqo")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_bp6it")
-RichTextLabel/colors/default_color = Color(0.771022, 0.105171, 0.162791, 1)
+RichTextLabel/colors/default_color = Color(0.854902, 0.321569, 0.298039, 1)
+RichTextLabel/colors/font_outline_color = Color(0.0941176, 0.203922, 0.529412, 1)
+RichTextLabel/constants/outline_size = 30
 RichTextLabel/font_sizes/normal_font_size = 100
 RichTextLabel/fonts/normal_font = ExtResource("3_qil1g")
 VBoxContainer/constants/separation = 10

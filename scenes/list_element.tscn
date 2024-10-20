@@ -13,11 +13,13 @@ label = NodePath("LockedElement")
 custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 texture = ExtResource("2_cwyo7")
-expand_mode = 1
-stretch_mode = 4
+expand_mode = 4
+stretch_mode = 5
 
 [node name="LockedElement" type="Label" parent="."]
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 text = "A long description of something to check if it'll fit in the box"
 autowrap_mode = 2
+visible_characters = 0
+visible_ratio = 0.0

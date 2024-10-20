@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://kwjhw0keyw5v"]
+[gd_scene load_steps=23 format=3 uid="uid://kwjhw0keyw5v"]
 
 [ext_resource type="Texture2D" uid="uid://c2mofn4flw6fh" path="res://art/machine_back.png" id="1_bebtx"]
 [ext_resource type="Script" path="res://scenes/gacha_machine.gd" id="2_pa0j3"]
@@ -6,7 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://ddxa786mjgd3r" path="res://art/machine_front.png" id="4_vygrh"]
 [ext_resource type="Texture2D" uid="uid://co01nhcbte86k" path="res://art/knob_ring.png" id="5_e1eh2"]
 [ext_resource type="Texture2D" uid="uid://e5llv3gshnu8" path="res://art/knob.png" id="6_wrmun"]
+[ext_resource type="AudioStream" uid="uid://x6imbkadm3ur" path="res://sounds/knob/knob_1.wav" id="7_h36dy"]
 [ext_resource type="FontFile" uid="uid://1v3ervj5rdy8" path="res://art/zen_maru_gothic/ZenMaruGothic-Black.ttf" id="7_i4u66"]
+[ext_resource type="AudioStream" uid="uid://ilth1a2jr7bh" path="res://sounds/knob/knob_2.wav" id="8_cisnn"]
+[ext_resource type="AudioStream" uid="uid://cp58vduwuwb6q" path="res://sounds/knob/knob_3.wav" id="9_r88ac"]
+[ext_resource type="AudioStream" uid="uid://damxy552qkdqw" path="res://sounds/knob/knob_nope_1.wav" id="10_t2qkh"]
+[ext_resource type="AudioStream" uid="uid://bo4iwedavr4v8" path="res://sounds/knob/knob_nope_2.wav" id="11_7hpeo"]
+[ext_resource type="AudioStream" uid="uid://us7048b1aenw" path="res://sounds/knob/knob_nope_3.wav" id="12_ph3q8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y0c1j"]
 radius = 120.0
@@ -23,16 +29,34 @@ friction = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ngg7"]
 radius = 125.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mvamx"]
+streams_count = 3
+stream_0/stream = ExtResource("7_h36dy")
+stream_1/stream = ExtResource("8_cisnn")
+stream_2/stream = ExtResource("9_r88ac")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vqlen"]
+streams_count = 3
+stream_0/stream = ExtResource("10_t2qkh")
+stream_1/stream = ExtResource("11_7hpeo")
+stream_2/stream = ExtResource("12_ph3q8")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_sc1v5"]
 radius = 50.0
 
-[node name="GachaMachine" type="Sprite2D" node_paths=PackedStringArray("ball_node", "knob", "ball_detector")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcxjj"]
+size = Vector2(200, 250)
+
+[node name="GachaMachine" type="Sprite2D" node_paths=PackedStringArray("ball_node", "hole", "knob", "ball_detector", "audio_yep", "audio_nope")]
 texture = ExtResource("1_bebtx")
 script = ExtResource("2_pa0j3")
 ball_scene = ExtResource("3_xv6nv")
 ball_node = NodePath("Balls")
+hole = NodePath("Hole")
 knob = NodePath("GachaKnob")
 ball_detector = NodePath("Hole")
+audio_yep = NodePath("GachaKnob/HappyKnob")
+audio_nope = NodePath("GachaKnob/UnhappyKnob")
 
 [node name="Hole" type="Area2D" parent="."]
 position = Vector2(311, 599)
@@ -48,7 +72,7 @@ position = Vector2(0, -500)
 physics_material_override = SubResource("PhysicsMaterial_4nx25")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Guts"]
-polygon = PackedVector2Array(-394, 15, -463, -19, -490, -97, -492, -640, -416, -767, 414, -759, 479, -609, 495, -154, 482, -67, 428, 5, 301, 34, 147, 75, 248, 205, 279, 337, 221, 475, 66, 554, -68, 552, -164, 467, -167, 599, -225, 684, -325, 702, -302, 771, 573, 783, 588, -872, -619, -870, -593, 772, -306, 772, -330, 700, -419, 627, -427, 559, -387, 345, -299, 219, -156, 76, -226, 43)
+polygon = PackedVector2Array(-394, 15, -463, -19, -490, -97, -492, -640, -416, -767, 414, -759, 479, -609, 495, -154, 482, -67, 428, 5, 301, 34, 147, 75, 266, 178, 299, 348, 209, 526, 66, 554, -68, 552, -164, 467, -167, 599, -225, 684, -325, 702, -302, 771, 573, 783, 588, -872, -619, -870, -593, 772, -306, 772, -330, 700, -419, 627, -427, 559, -387, 345, -299, 219, -156, 76, -226, 43)
 
 [node name="GutsBall" type="Area2D" parent="Guts"]
 position = Vector2(-200, 350)
@@ -60,12 +84,11 @@ shape = SubResource("CircleShape2D_d5vlb")
 texture = ExtResource("4_vygrh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 300)
+position = Vector2(0, 330)
 texture = ExtResource("5_e1eh2")
 
 [node name="GachaKnob" type="Area2D" parent="."]
-position = Vector2(0, 300)
-rotation = 1.5708
+position = Vector2(0, 330)
 
 [node name="Sprite2D" type="Sprite2D" parent="GachaKnob"]
 texture = ExtResource("6_wrmun")
@@ -75,13 +98,23 @@ physics_material_override = SubResource("PhysicsMaterial_7whlx")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GachaKnob/KnobMechanism"]
 rotation = 1.5708
-polygon = PackedVector2Array(-62, -243, 88, -248, 171, -213, 228, -89, 233, 57, 184.259, 116.913, 127, 164, 110, 63, 45, -9, -48, -19, -128, 29, -157, 106, -156, 218, -213, 146, -219, 36, -216, -158)
+polygon = PackedVector2Array(-146.001, -244.999, 11.999, -280, 182.999, -204.001, 219, -81.0008, 221, 56.9992, 184.259, 116.913, 127, 164, 113.001, 91.9992, 45.0002, 33.9997, -47.9998, 23.0003, -124, 64.0009, -153.999, 120.001, -156, 218, -213, 146, -219, 36, -216, -158)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GachaKnob"]
 shape = SubResource("CircleShape2D_7ngg7")
 
+[node name="HappyKnob" type="AudioStreamPlayer2D" parent="GachaKnob"]
+position = Vector2(0, -330)
+stream = SubResource("AudioStreamRandomizer_mvamx")
+volume_db = 10.0
+
+[node name="UnhappyKnob" type="AudioStreamPlayer2D" parent="GachaKnob"]
+position = Vector2(0, -330)
+stream = SubResource("AudioStreamRandomizer_vqlen")
+volume_db = 10.0
+
 [node name="ResetLevel" type="Area2D" parent="."]
-position = Vector2(345, 375)
+position = Vector2(338, 295)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ResetLevel"]
 shape = SubResource("CircleShape2D_sc1v5")
@@ -93,9 +126,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -76.0
-offset_top = 30.0
+offset_top = 40.0
 offset_right = 76.0
-offset_bottom = 103.0
+offset_bottom = 113.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.0941176, 0.203922, 0.529412, 1)
@@ -104,7 +137,39 @@ theme_override_font_sizes/font_size = 40
 text = "RESET"
 horizontal_alignment = 1
 
+[node name="CreditsLabel" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CreditsLabel"]
+position = Vector2(325, 617)
+shape = SubResource("RectangleShape2D_lcxjj")
+
+[node name="Label" type="Label" parent="CreditsLabel"]
+offset_left = 260.0
+offset_top = 510.0
+offset_right = 383.0
+offset_bottom = 569.0
+theme_override_colors/font_color = Color(0.0941176, 0.203922, 0.529412, 1)
+theme_override_fonts/font = ExtResource("7_i4u66")
+theme_override_font_sizes/font_size = 30
+text = "credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = -420.0
+offset_top = -700.0
+offset_right = -141.0
+offset_bottom = -627.0
+theme_override_colors/font_color = Color(0.913065, 0.383101, 0.348409, 1)
+theme_override_colors/font_outline_color = Color(0.0941176, 0.203922, 0.529412, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_i4u66")
+theme_override_font_sizes/font_size = 50
+text = "GACHA LIFE"
+
 [connection signal="input_event" from="Hole" to="." method="_on_hole_input_event"]
 [connection signal="body_entered" from="Guts/GutsBall" to="." method="_on_guts_ball_body_entered"]
+[connection signal="body_entered" from="GachaKnob" to="." method="_on_gacha_knob_body_entered"]
 [connection signal="input_event" from="GachaKnob" to="." method="_on_gacha_knob_input_event"]
 [connection signal="input_event" from="ResetLevel" to="." method="_on_reset_level_input_event"]
+[connection signal="input_event" from="CreditsLabel" to="." method="_on_credits_label_input_event"]

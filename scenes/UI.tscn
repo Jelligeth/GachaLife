@@ -1,31 +1,53 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmvoe16fod6s1"]
+[gd_scene load_steps=16 format=3 uid="uid://bmvoe16fod6s1"]
 
 [ext_resource type="Theme" uid="uid://tiki8lc6ldfh" path="res://art/theme.tres" id="1_0xauf"]
 [ext_resource type="Script" path="res://scenes/ui.gd" id="1_s6qce"]
 [ext_resource type="PackedScene" uid="uid://lmdujtfpll6q" path="res://scenes/list_element.tscn" id="2_ucv8m"]
+[ext_resource type="FontFile" uid="uid://1v3ervj5rdy8" path="res://art/zen_maru_gothic/ZenMaruGothic-Black.ttf" id="4_7dooy"]
 [ext_resource type="Shader" path="res://art/blur.gdshader" id="4_aggpe"]
+[ext_resource type="Texture2D" uid="uid://b7j7inv6dfeci" path="res://art/half2.png" id="5_v5hej"]
+[ext_resource type="Texture2D" uid="uid://cfrw3nykkilyl" path="res://art/half1.png" id="6_3na0x"]
+[ext_resource type="AudioStream" uid="uid://c36t50lpvck5n" path="res://sounds/lock.mp3" id="7_0k1jr"]
+[ext_resource type="AudioStream" uid="uid://e0tymq62s0q2" path="res://sounds/win.mp3" id="7_yn8xi"]
+[ext_resource type="AudioStream" uid="uid://b3uev3cy4mmrx" path="res://sounds/discard.wav" id="8_axprb"]
+[ext_resource type="AudioStream" uid="uid://c1terjn0fsr4c" path="res://sounds/ball/pop_open_1.wav" id="10_i8dcv"]
+[ext_resource type="Texture2D" uid="uid://nbjytrs52v03" path="res://art/ball.png" id="11_mdvci"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wb45w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0ur3"]
+bg_color = Color(1, 0.886334, 0.428708, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.0941176, 0.203922, 0.529412, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rcj0h"]
 shader = ExtResource("4_aggpe")
 shader_parameter/lod = 5.0
 shader_parameter/mix_percentage = 0.3
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uy78a"]
-size = Vector2(1024, 1024)
-
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("start_screen", "coins_text", "reward_screen", "reward_label", "reward_text", "element_list", "discard_button", "end_screen", "end_list", "restart_button")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("start_screen", "coins_text", "reward_screen", "reward_label", "reward_text", "element_list", "discard_button", "end_screen", "end_list", "restart_button", "credits", "open_ball_audio", "lock_audio", "discard_audio", "win_audio")]
 script = ExtResource("1_s6qce")
 new_element_scene = ExtResource("2_ucv8m")
 start_screen = NodePath("Theme/StartScreen")
 coins_text = NodePath("Theme/Game/Rerolling/Reroll/Counter")
 reward_screen = NodePath("Theme/RewardScreen")
-reward_label = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/RewardLabel")
+reward_label = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/MarginContainer/Panel/MarginContainer/RewardLabel")
 reward_text = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/RewardText")
 element_list = NodePath("Theme/Game/LockedIn/VBoxContainer")
 discard_button = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonDiscard")
 end_screen = NodePath("Theme/EndScreen")
 end_list = NodePath("Theme/EndScreen/VBoxContainer/VBoxContainer")
 restart_button = NodePath("Theme/EndScreen/VBoxContainer/Button")
+credits = NodePath("Theme/Game/Credits")
+open_ball_audio = NodePath("Theme/RewardScreen/AudioStreamPlayer2D")
+lock_audio = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonLock/AudioStreamPlayer2D")
+discard_audio = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonDiscard/AudioStreamPlayer2D2")
+win_audio = NodePath("Theme/EndScreen/AudioStreamPlayer2D")
 
 [node name="Theme" type="Control" parent="."]
 layout_mode = 3
@@ -100,6 +122,75 @@ layout_mode = 2
 text = "COINS REMAINING"
 horizontal_alignment = 1
 
+[node name="Credits" type="PanelContainer" parent="Theme/Game"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -72.5
+offset_right = 20.0
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wb45w")
+
+[node name="Panel" type="Panel" parent="Theme/Game/Credits"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Theme/Game/Credits"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Theme/Game/Credits/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r0ur3")
+
+[node name="Label" type="Label" parent="Theme/Game/Credits/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.772549, 0.105882, 0.160784, 1)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.203922, 0.52549, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("4_7dooy")
+theme_override_font_sizes/font_size = 100
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Theme/Game/Credits/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Theme/Game/Credits/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Theme/Game/Credits/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game and Art: Daoyi Liu"
+
+[node name="Label2" type="Label" parent="Theme/Game/Credits/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sound: freesounds.org,
+zapsplat.com, dova-s.jp"
+
+[node name="Label3" type="Label" parent="Theme/Game/Credits/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="Theme/Game/Credits/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Made in Godot"
+
+[node name="Label5" type="Label" parent="Theme/Game/Credits/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Theme/Game/Credits/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "CLOSE"
+
+[node name="Label" type="Label" parent="Theme/Game/Credits/VBoxContainer"]
+layout_mode = 2
+
 [node name="RewardScreen" type="PanelContainer" parent="Theme"]
 visible = false
 layout_mode = 1
@@ -121,14 +212,16 @@ color = Color(0, 0, 0, 0.243137)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
+theme_override_constants/separation = -500
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Theme/RewardScreen/HboxContainer"]
 layout_mode = 2
 mouse_filter = 2
-texture = SubResource("PlaceholderTexture2D_uy78a")
+texture = ExtResource("5_v5hej")
 
 [node name="MarginContainer" type="MarginContainer" parent="Theme/RewardScreen/HboxContainer"]
+z_index = 1
 layout_mode = 2
 mouse_filter = 2
 
@@ -136,12 +229,6 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
-
-[node name="RewardLabel" type="RichTextLabel" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 80
-text = "Favorite thing in the world:"
-fit_content = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -154,6 +241,39 @@ theme_override_constants/margin_bottom = 10
 [node name="Panel" type="Panel" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
+
+[node name="MarginContainer" type="Panel" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="RewardLabel" type="Label" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/MarginContainer/Panel/MarginContainer"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -478.5
+offset_top = -58.5
+offset_right = 478.5
+offset_bottom = 58.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.950703, 0.815397, 1.15514e-06, 1)
+theme_override_colors/font_outline_color = Color(0.0941176, 0.203922, 0.529412, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("4_7dooy")
+theme_override_font_sizes/font_size = 80
+text = "Favorite thing in the world:"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
@@ -175,93 +295,29 @@ size_flags_horizontal = 3
 text = "LOCK
 IT IN"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonLock"]
+stream = ExtResource("7_0k1jr")
+volume_db = 10.0
+
 [node name="ButtonDiscard" type="Button" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "THROW
 IT AWAY"
 
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonDiscard"]
+position = Vector2(-574, 0)
+stream = ExtResource("8_axprb")
+volume_db = 10.0
+
 [node name="TextureRect2" type="TextureRect" parent="Theme/RewardScreen/HboxContainer"]
 layout_mode = 2
-texture = SubResource("PlaceholderTexture2D_uy78a")
-flip_h = true
+mouse_filter = 2
+texture = ExtResource("6_3na0x")
 
-[node name="EndScreen" type="PanelContainer" parent="Theme"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="Control" parent="Theme/EndScreen"]
-layout_mode = 2
-
-[node name="ColorRect2" type="ColorRect" parent="Theme/EndScreen/Background"]
-layout_mode = 2
-offset_right = 3240.0
-offset_bottom = 2000.0
-color = Color(0.34902, 0.580392, 0.788235, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="Theme/EndScreen/Background"]
-layout_mode = 2
-offset_right = 3240.0
-offset_bottom = 2000.0
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 200
-theme_override_constants/margin_bottom = 0
-
-[node name="ColorRect" type="ColorRect" parent="Theme/EndScreen/Background/MarginContainer"]
-layout_mode = 2
-color = Color(0.921569, 0.921569, 0.921569, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="Theme/EndScreen"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/margin_left = 300
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Theme/EndScreen/MarginContainer"]
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "GACHAPON LIFE"
-fit_content = true
-autowrap_mode = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Theme/EndScreen"]
-layout_mode = 2
-theme_override_constants/separation = 50
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Theme/EndScreen/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Button" type="Button" parent="Theme/EndScreen/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "THE END"
-
-[node name="MarginContainer2" type="MarginContainer" parent="Theme/EndScreen"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/margin_right = 300
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Theme/EndScreen/MarginContainer2"]
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-text = "ガチャポンライフ
-"
-fit_content = true
-autowrap_mode = 0
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Theme/RewardScreen"]
+stream = ExtResource("10_i8dcv")
+volume_db = 10.0
 
 [node name="StartScreen" type="PanelContainer" parent="Theme"]
 clip_contents = true
@@ -285,26 +341,36 @@ color = Color(0.34902, 0.580392, 0.788235, 1)
 layout_mode = 2
 offset_right = 3240.0
 offset_bottom = 2000.0
-theme_override_constants/margin_left = 200
+theme_override_constants/margin_left = 150
 theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 200
+theme_override_constants/margin_right = 150
 theme_override_constants/margin_bottom = 0
 
 [node name="ColorRect" type="ColorRect" parent="Theme/StartScreen/Background/MarginContainer"]
 layout_mode = 2
-color = Color(0.920882, 0.909188, 0.886647, 1)
+color = Color(0.921569, 0.921569, 0.921569, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Theme/StartScreen"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/margin_left = 300
+theme_override_constants/margin_left = 200
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Theme/StartScreen/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Theme/StartScreen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="TextureRect" type="TextureRect" parent="Theme/StartScreen/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("11_mdvci")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Theme/StartScreen/MarginContainer/HBoxContainer"]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-text = "GACHAPON LIFE"
+text = "GACHA LIFE"
 fit_content = true
 autowrap_mode = 0
 
@@ -334,19 +400,18 @@ alignment = 1
 [node name="Label" type="Label" parent="Theme/StartScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Each level, spend coins to draw gachas until you're satisfied with what you got
+text = "Draw gachas until you're satisfied with what you've got
 "
 
 [node name="Label2" type="Label" parent="Theme/StartScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "You only get to keep one gacha per level
-"
+text = "Each level is a new category, you can only keep one gacha per level"
 
 [node name="Label3" type="Label" parent="Theme/StartScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "You get one new coin per level in addition to your starting coins"
+text = "You will get one free coin per level in addition to your starting coins"
 
 [node name="Control" type="Control" parent="Theme/StartScreen/VBoxContainer"]
 layout_mode = 2
@@ -358,7 +423,103 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 100
 text = "BEGIN"
 
+[node name="EndScreen" type="PanelContainer" parent="Theme"]
+visible = false
+z_index = 3
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Control" parent="Theme/EndScreen"]
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Theme/EndScreen/Background"]
+layout_mode = 2
+offset_right = 3240.0
+offset_bottom = 2000.0
+color = Color(0.34902, 0.580392, 0.788235, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Theme/EndScreen/Background"]
+layout_mode = 2
+offset_right = 3240.0
+offset_bottom = 2000.0
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 0
+
+[node name="ColorRect" type="ColorRect" parent="Theme/EndScreen/Background/MarginContainer"]
+layout_mode = 2
+color = Color(0.921569, 0.921569, 0.921569, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Theme/EndScreen"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 200
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Theme/EndScreen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="Theme/EndScreen/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_mdvci")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Theme/EndScreen/MarginContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+text = "GACHA LIFE"
+fit_content = true
+autowrap_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Theme/EndScreen"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Theme/EndScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" type="Button" parent="Theme/EndScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "THE END"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Theme/EndScreen"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/margin_right = 300
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Theme/EndScreen/MarginContainer2"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+text = "ガチャポンライフ
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Theme/EndScreen"]
+stream = ExtResource("7_yn8xi")
+volume_db = 10.0
+
+[connection signal="pressed" from="Theme/Game/Credits/VBoxContainer/Button" to="Theme/Game/Credits" method="hide"]
 [connection signal="pressed" from="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonLock" to="." method="_on_button_lock_pressed"]
 [connection signal="pressed" from="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonDiscard" to="." method="_on_button_discard_pressed"]
-[connection signal="pressed" from="Theme/EndScreen/VBoxContainer/Button" to="." method="_on_end_button_pressed"]
 [connection signal="pressed" from="Theme/StartScreen/VBoxContainer/Button" to="Theme/StartScreen" method="hide"]
+[connection signal="pressed" from="Theme/EndScreen/VBoxContainer/Button" to="." method="_on_end_button_pressed"]
