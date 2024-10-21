@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/coffee_beat.mp3-4e500d04727a22a63a117fe2311c2
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0.0
 bpm=0.0
 beat_count=0

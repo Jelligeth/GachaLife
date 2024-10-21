@@ -93,5 +93,5 @@ func get_coin() -> void:
 	update_coin_count(-1)
 	
 func _on_coin_purse_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if coin == null and event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+	if coin_count and coin == null and event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		get_coin()
