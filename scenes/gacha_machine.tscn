@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://kwjhw0keyw5v"]
+[gd_scene load_steps=30 format=3 uid="uid://kwjhw0keyw5v"]
 
 [ext_resource type="Texture2D" uid="uid://c2mofn4flw6fh" path="res://art/machine_back.png" id="1_bebtx"]
 [ext_resource type="Script" path="res://scenes/gacha_machine.gd" id="2_pa0j3"]
 [ext_resource type="PackedScene" uid="uid://cvo3meclslhtm" path="res://scenes/gacha_ball.tscn" id="3_xv6nv"]
 [ext_resource type="Texture2D" uid="uid://ddxa786mjgd3r" path="res://art/machine_front.png" id="4_vygrh"]
+[ext_resource type="Texture2D" uid="uid://cg57ammqfm1hi" path="res://art/shake_label.png" id="5_5nlxi"]
 [ext_resource type="Texture2D" uid="uid://co01nhcbte86k" path="res://art/knob_ring.png" id="5_e1eh2"]
 [ext_resource type="Texture2D" uid="uid://e5llv3gshnu8" path="res://art/knob.png" id="6_wrmun"]
 [ext_resource type="AudioStream" uid="uid://x6imbkadm3ur" path="res://sounds/knob/knob_1.wav" id="7_h36dy"]
@@ -13,21 +14,24 @@
 [ext_resource type="AudioStream" uid="uid://damxy552qkdqw" path="res://sounds/knob/knob_nope_1.wav" id="10_t2qkh"]
 [ext_resource type="AudioStream" uid="uid://bo4iwedavr4v8" path="res://sounds/knob/knob_nope_2.wav" id="11_7hpeo"]
 [ext_resource type="AudioStream" uid="uid://us7048b1aenw" path="res://sounds/knob/knob_nope_3.wav" id="12_ph3q8"]
+[ext_resource type="AudioStream" uid="uid://ckko0pcsfwim7" path="res://sounds/coin/insert.wav" id="13_kbkuw"]
+[ext_resource type="AudioStream" uid="uid://c1nfm4ptwxpw7" path="res://sounds/coin/insert2.wav" id="14_pc7j1"]
+[ext_resource type="AudioStream" uid="uid://bfptoyn24xnlt" path="res://sounds/coin/insert3.wav" id="15_mks63"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y0c1j"]
-radius = 120.0
+radius = 100.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4p5o"]
+size = Vector2(1024, 800)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4nx25"]
 friction = 0.1
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_d5vlb"]
-radius = 50.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7whlx"]
 friction = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ngg7"]
-radius = 125.0
+radius = 120.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mvamx"]
 streams_count = 3
@@ -41,85 +45,121 @@ stream_0/stream = ExtResource("10_t2qkh")
 stream_1/stream = ExtResource("11_7hpeo")
 stream_2/stream = ExtResource("12_ph3q8")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rj8wl"]
+radius = 80.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_meycg"]
+streams_count = 3
+stream_0/stream = ExtResource("13_kbkuw")
+stream_1/stream = ExtResource("14_pc7j1")
+stream_2/stream = ExtResource("15_mks63")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_sc1v5"]
 radius = 50.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lcxjj"]
 size = Vector2(200, 250)
 
-[node name="GachaMachine" type="Sprite2D" node_paths=PackedStringArray("ball_node", "hole", "knob", "ball_detector", "audio_yep", "audio_nope")]
-texture = ExtResource("1_bebtx")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t475f"]
+bg_color = Color(0.858824, 0.380392, 0.282353, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.0941176, 0.203922, 0.529412, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[node name="GachaMachine" type="Node2D" node_paths=PackedStringArray("machine", "machine_label", "ball_node", "knob", "audio_knob_turn", "audio_knob_stop", "audio_coinslot")]
 script = ExtResource("2_pa0j3")
 ball_scene = ExtResource("3_xv6nv")
-ball_node = NodePath("Balls")
-hole = NodePath("Hole")
-knob = NodePath("GachaKnob")
-ball_detector = NodePath("Hole")
-audio_yep = NodePath("GachaKnob/HappyKnob")
-audio_nope = NodePath("GachaKnob/UnhappyKnob")
+machine = NodePath("Body")
+machine_label = NodePath("Body/PanelContainer/MarginContainer/MachineLabel")
+ball_node = NodePath("Body/Balls")
+knob = NodePath("Body/Knob")
+audio_knob_turn = NodePath("Body/Knob/HappyKnob")
+audio_knob_stop = NodePath("Body/Knob/UnhappyKnob")
+audio_coinslot = NodePath("Body/CoinHole/AudioStreamPlayer2D")
 
-[node name="Hole" type="Area2D" parent="."]
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("1_bebtx")
+
+[node name="Hole" type="Area2D" parent="Body"]
 position = Vector2(311, 599)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Hole"]
 position = Vector2(-609, -40)
 shape = SubResource("CircleShape2D_y0c1j")
 
-[node name="Balls" type="Node2D" parent="."]
+[node name="Balls" type="Node2D" parent="Body"]
 position = Vector2(0, -500)
 
-[node name="Guts" type="StaticBody2D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_4nx25")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Guts"]
-polygon = PackedVector2Array(-394, 15, -463, -19, -490, -97, -492, -640, -416, -767, 414, -759, 479, -609, 495, -154, 482, -67, 428, 5, 301, 34, 147, 75, 266, 178, 299, 348, 209, 526, 66, 554, -68, 552, -164, 467, -167, 599, -225, 684, -325, 702, -302, 771, 573, 783, 588, -872, -619, -870, -593, 772, -306, 772, -330, 700, -419, 627, -427, 559, -387, 345, -299, 219, -156, 76, -226, 43)
-
-[node name="GutsBall" type="Area2D" parent="Guts"]
-position = Vector2(-200, 350)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Guts/GutsBall"]
-shape = SubResource("CircleShape2D_d5vlb")
-
-[node name="Cover" type="Sprite2D" parent="."]
+[node name="Cover" type="Sprite2D" parent="Body"]
 texture = ExtResource("4_vygrh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Window" type="Area2D" parent="Body/Cover"]
+position = Vector2(0, -300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Cover/Window"]
+shape = SubResource("RectangleShape2D_f4p5o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Body/Cover"]
+position = Vector2(300, -400)
+texture = ExtResource("5_5nlxi")
+
+[node name="Guts" type="StaticBody2D" parent="Body"]
+physics_material_override = SubResource("PhysicsMaterial_4nx25")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Guts"]
+polygon = PackedVector2Array(-394, 15, -463, -19, -490, -97, -492, -640, -416, -767, 414, -759, 479, -609, 495, -154, 482, -67, 428, 5, 98, 44, 117, 64, 201, 90, 271, 232, 250, 392, 148, 521, 40, 600, -88, 602, -171, 533, -203, 462, -166, 574, -194, 648, -248, 689, -348, 688, -302, 771, 573, 783, 588, -872, -619, -870, -593, 772, -306, 772, -355, 685, -419, 627, -427, 559, -387, 345, -250, 150, -124, 72, -122, 45)
+
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
 position = Vector2(0, 330)
 texture = ExtResource("5_e1eh2")
 
-[node name="GachaKnob" type="Area2D" parent="."]
+[node name="Knob" type="Area2D" parent="Body"]
 position = Vector2(0, 330)
 
-[node name="Sprite2D" type="Sprite2D" parent="GachaKnob"]
+[node name="Sprite2D" type="Sprite2D" parent="Body/Knob"]
 texture = ExtResource("6_wrmun")
 
-[node name="KnobMechanism" type="StaticBody2D" parent="GachaKnob"]
+[node name="KnobMechanism" type="StaticBody2D" parent="Body/Knob"]
 physics_material_override = SubResource("PhysicsMaterial_7whlx")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GachaKnob/KnobMechanism"]
-rotation = 1.5708
-polygon = PackedVector2Array(-146.001, -244.999, 11.999, -280, 182.999, -204.001, 219, -81.0008, 221, 56.9992, 184.259, 116.913, 127, 164, 113.001, 91.9992, 45.0002, 33.9997, -47.9998, 23.0003, -124, 64.0009, -153.999, 120.001, -156, 218, -213, 146, -219, 36, -216, -158)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Knob/KnobMechanism"]
+polygon = PackedVector2Array(-84, -1, -69, -118, 88, -281, 187, -205, 239, -105, 256, 62, 181, 166, 2, 226, -147, 178, -188, 56)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GachaKnob"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Knob"]
 shape = SubResource("CircleShape2D_7ngg7")
 
-[node name="HappyKnob" type="AudioStreamPlayer2D" parent="GachaKnob"]
+[node name="HappyKnob" type="AudioStreamPlayer2D" parent="Body/Knob"]
 position = Vector2(0, -330)
 stream = SubResource("AudioStreamRandomizer_mvamx")
 volume_db = 10.0
 
-[node name="UnhappyKnob" type="AudioStreamPlayer2D" parent="GachaKnob"]
+[node name="UnhappyKnob" type="AudioStreamPlayer2D" parent="Body/Knob"]
 position = Vector2(0, -330)
 stream = SubResource("AudioStreamRandomizer_vqlen")
 volume_db = 10.0
 
-[node name="ResetLevel" type="Area2D" parent="."]
-position = Vector2(338, 295)
+[node name="CoinHole" type="Area2D" parent="Body"]
+position = Vector2(315, 235)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ResetLevel"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/CoinHole"]
+shape = SubResource("CircleShape2D_rj8wl")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Body/CoinHole"]
+stream = SubResource("AudioStreamRandomizer_meycg")
+
+[node name="ResetLevel" type="Area2D" parent="Body"]
+position = Vector2(318, 396)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/ResetLevel"]
 shape = SubResource("CircleShape2D_sc1v5")
 
-[node name="Label" type="Label" parent="ResetLevel"]
+[node name="Label" type="Label" parent="Body/ResetLevel"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -131,19 +171,20 @@ offset_right = 76.0
 offset_bottom = 113.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.0941176, 0.203922, 0.529412, 1)
 theme_override_fonts/font = ExtResource("7_i4u66")
 theme_override_font_sizes/font_size = 40
 text = "RESET"
 horizontal_alignment = 1
 
-[node name="CreditsLabel" type="Area2D" parent="."]
+[node name="CreditsLabel" type="Area2D" parent="Body"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CreditsLabel"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/CreditsLabel"]
 position = Vector2(325, 617)
 shape = SubResource("RectangleShape2D_lcxjj")
 
-[node name="Label" type="Label" parent="CreditsLabel"]
+[node name="Label" type="Label" parent="Body/CreditsLabel"]
 offset_left = 260.0
 offset_top = 510.0
 offset_right = 383.0
@@ -155,21 +196,39 @@ text = "credits"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="."]
-offset_left = -420.0
-offset_top = -700.0
-offset_right = -141.0
-offset_bottom = -627.0
-theme_override_colors/font_color = Color(0.913065, 0.383101, 0.348409, 1)
+[node name="PanelContainer" type="PanelContainer" parent="Body"]
+offset_left = -450.0
+offset_top = -740.0
+offset_right = -3.0
+offset_bottom = -623.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t475f")
+
+[node name="MarginContainer" type="MarginContainer" parent="Body/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 0
+
+[node name="MachineLabel" type="Label" parent="Body/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.921569, 0.921569, 0.921569, 1)
 theme_override_colors/font_outline_color = Color(0.0941176, 0.203922, 0.529412, 1)
-theme_override_constants/outline_size = 10
+theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("7_i4u66")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 60
 text = "GACHA LIFE"
 
-[connection signal="input_event" from="Hole" to="." method="_on_hole_input_event"]
-[connection signal="body_entered" from="Guts/GutsBall" to="." method="_on_guts_ball_body_entered"]
-[connection signal="body_entered" from="GachaKnob" to="." method="_on_gacha_knob_body_entered"]
-[connection signal="input_event" from="GachaKnob" to="." method="_on_gacha_knob_input_event"]
-[connection signal="input_event" from="ResetLevel" to="." method="_on_reset_level_input_event"]
-[connection signal="input_event" from="CreditsLabel" to="." method="_on_credits_label_input_event"]
+[connection signal="body_entered" from="Body/Hole" to="." method="_on_hole_body_entered"]
+[connection signal="input_event" from="Body/Hole" to="." method="_on_hole_input_event"]
+[connection signal="input_event" from="Body/Cover/Window" to="." method="_on_window_input_event"]
+[connection signal="body_entered" from="Body/Knob" to="Body" method="_on_gacha_knob_body_entered"]
+[connection signal="body_exited" from="Body/Knob" to="Body" method="_on_gacha_knob_body_exited"]
+[connection signal="input_event" from="Body/Knob" to="." method="_on_gacha_knob_input_event"]
+[connection signal="input_event" from="Body/Knob" to="Body" method="_on_gacha_knob_input_event"]
+[connection signal="area_entered" from="Body/CoinHole" to="." method="_on_coin_hole_area_entered"]
+[connection signal="area_exited" from="Body/CoinHole" to="." method="_on_coin_hole_area_exited"]
+[connection signal="input_event" from="Body/CoinHole" to="." method="_on_coin_hole_input_event"]
+[connection signal="input_event" from="Body/ResetLevel" to="." method="_on_reset_level_input_event"]
+[connection signal="input_event" from="Body/CreditsLabel" to="." method="_on_credits_label_input_event"]

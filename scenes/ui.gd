@@ -2,20 +2,21 @@ extends CanvasLayer
 class_name UI
 
 signal lock_in
+signal start_over
 
 @export var new_element_scene: PackedScene
 @export_category("Nodes")
 @export var start_screen: PanelContainer
+@export var credits: Panel
 @export var coins_text: RichTextLabel
 @export var reward_screen: PanelContainer
 @export var reward_label: Label
 @export var reward_text: Label
 @export var element_list: VBoxContainer
 @export var discard_button: Button
+@export var restart_button: Button
 @export var end_screen: PanelContainer
 @export var end_list: VBoxContainer
-@export var restart_button: Button
-@export var credits: PanelContainer
 @export_category("Audio")
 @export var open_ball_audio: AudioStreamPlayer2D
 @export var lock_audio: AudioStreamPlayer2D
@@ -48,7 +49,9 @@ func add_locked_element(label: String, text: String) -> void:
 func disable_discard_button(disabled: bool) -> void:
 	discard_button.disabled = disabled
 
-func end_game() -> void:
+func end_game(true_end: bool) -> void:
+	if true_end:
+		restart_button.hide()
 	win_audio.play()
 	var list = element_list.get_children()
 	if list.size() == 1:
@@ -74,5 +77,15 @@ func _on_button_discard_pressed() -> void:
 	discard_audio.play()
 	reward_screen.hide()
 
-func _on_end_button_pressed() -> void:
-	get_tree().reload_current_scene()
+func _on_restart_button_pressed() -> void:
+	reward_screen.hide()
+	credits.hide()
+	end_screen.hide()
+	var list = end_list.get_children()
+	for item in list:
+		item.queue_free()
+	start_over.emit()
+	win_audio.play()
+
+func _on_start_button_pressed() -> void:
+	win_audio.play()

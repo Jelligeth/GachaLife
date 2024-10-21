@@ -1,90 +1,81 @@
 [
-	["favorite sticker:", [
+	["favorite sticker:", "GACHA STICKER", [
 		"unicorn sticker",
-		"rainbow sticker",
-		"fruit sticker",
-		"cat sticker",
-		"slightly offensive sticker",
-		"moon sticker",
 		"rat sticker",
-		"insect sticker",
-		"flower sticker",
-		"torn sticker",
-		"fish sticker",
+		"pride sticker",
 		"mushroom sticker",
 		"band sticker",
-		"skull sticker",
+		"torn sticker",
+		"slightly offensive sticker",
 		"barcode sticker",
 		"blank sticker",
-		"emoji sticker",
-		"edgy sticker"]],
+		"faded sticker"]],
 		
-	["favorite toy:", [
-		"toy truck",
+	["favorite toy:", "HAPPY TOYS", [
 		"rubber ducky",
-		"troll doll",
+		"toy truck",
 		"baby doll",
+		"troll doll",
 		"plastic pony",
+		"tin robot",
 		"plastic dinosaur",
-		"teddy bear",
 		"memo paper",
 		"bits of string",
 		"a stick",
-		"tin robot",
 		"rusty nails",
-		"fidget toy",
 		"an old shoe",
 		"belly lint"]],
 		
-	["favorite hobby:", [
+	["favorite hobby:", "FUN TIME", [
 		"watching bad movies",
-		"reading erotic fantasy fiction",
+		"reading erotic fan fiction",
 		"crocheting strange dolls",
 		"knitting ridiculously long scarves",
-		"glamorous drag makeup",
 		"playing obscure indie games",
 		"some kind of sports",
 		"making silly music",
-		"hiking alone",
 		"falling down mountains on a bicycle",
 		"upcycling perfectly good furniture",
 		"making weirdly suggestive ceramic figures",
 		"complaining on the internet",
-		"arguing about opinions"]],
+		"picking at scabs",
+		"eating sugar"]],
 		
-	["education level:", [
+	["education level:", "GOOD LEARNING", [
 		"dropped out of preschool",
-		"matriculated",
+		"barely matriculated",
 		"online certificate",
 		"some diploma",
 		"it's all instinct baby!",
-		"univarsity of youtube",
+		"university of youtube",
 		"bachelor's degree",
 		"master's degree",
 		"doctorate",
 		"self taught",
 		"apprenticeship"]],
 		
-	["personality:", [
+	["personality:", "U-R", [
 		"creative but immature",
 		"athletic but arrogant",
 		"charismatic but judgemental",
-		"patient but dispassionate",
+		"patient but really just apathetic",
 		"tenacious but short tempered",
 		"adventurous but restless",
 		"intelligent but awkward",
-		"attractive but insecure"]],
+		"attractive but insecure",
+		"willful but uncooperative",
+		"imaginative but delusional"]],
 		
-	["career:", [
-		"freelancer: if you don't work, you don't get paid",
-		"contractor: good enough to keep, not good enough to keep permanently",
-		"full time employee: corporate lackey. synergy is your favorite word",
-		"entrepreneur: high risk, high risk",
-		"business owner: at least they call you boss to your face",
-		"unemployed: you tell yourself that there's a good reason for this",
-		"self employed: how else would you explain the two hundred bucks you got for helping your uncle move?"]],
+	["career:", "GOING DOING", [
+		"freelancer -if you don't work, you don't get paid!",
+		"contractor - good enough to keep, not good enough to keep permanently",
+		"full time employee - corporate lackey; synergy is your favorite word",
+		"entrepreneur - high risk, high risk",
+		"business owner - at least they call you boss to your face",
+		"unemployed - you tell yourself that there's a good reason for this",
+		"self employed - how else would you explain the two hundred bucks you got for helping your uncle move?"]],
 		
-	["life partner:", [
+	["life partner:", "SUKI SUKI", [
 		"there’s nothing but red flags, but you're color blind ",
 		"the vermillion sunset distracts you from all the fighting",
 		"you can spend hours doing nothing together",
@@ -95,7 +86,7 @@
 		"it's better than being single",
 		"it's better being single"]],
 		
-	["lifetyle:", [
+	["lifetyle:", "MY DAYS", [
 		"bustling dinners, festive gatherings, and warm evenings on the porch",
 		"successful career, bountiful income, and luxury beyond necessity",
 		"another adventure, party until sunrise, swimming in champagne",
@@ -104,18 +95,20 @@
 		"exhaustion merely distracted by sleep",
 		"anything for another hit"]],
 		
-	["cause of death:", [
+	["cause of death:", "DESU", [
 		"accident",
 		"illness",
 		"old age",
 		"murdered",
+		"isekaied",
 		"interdimensional glitch",
 		"choked on food",
 		"heart attack",
 		"death by chocolate",
 		"died while sleeping",
 		"drowned in money"]],
-	["overall performance:", [
+	
+	["overall performance:", "CHOICES",[
 		"no regrets",
 		"somewhat regrettable"]]
 ]

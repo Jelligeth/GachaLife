@@ -1,48 +1,76 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpls863ho1na2"]
+[gd_scene load_steps=13 format=3 uid="uid://bpls863ho1na2"]
 
 [ext_resource type="Script" path="res://scenes/game_controller.gd" id="1_4h8s8"]
 [ext_resource type="PackedScene" uid="uid://bmvoe16fod6s1" path="res://scenes/UI.tscn" id="1_83iu1"]
 [ext_resource type="PackedScene" uid="uid://kwjhw0keyw5v" path="res://scenes/gacha_machine.tscn" id="2_4dilj"]
 [ext_resource type="JSON" path="res://scripts/gacha_list.json" id="2_7jf06"]
-[ext_resource type="AudioStream" uid="uid://lub5y55pql82" path="res://sounds/beautiful_train.mp3" id="5_c2pxt"]
+[ext_resource type="PackedScene" uid="uid://ciqnefobpwaa8" path="res://scenes/coin.tscn" id="3_rh7ai"]
+[ext_resource type="Texture2D" uid="uid://b2f5mp4xqh5xi" path="res://art/background.png" id="4_bmgos"]
+[ext_resource type="PackedScene" uid="uid://b3e3ht82ddbxx" path="res://scenes/coin_purse.tscn" id="6_6in7d"]
 [ext_resource type="AudioStream" uid="uid://2vje7dsq8fm0" path="res://sounds/coffee_beat.mp3" id="6_e6wyu"]
 [ext_resource type="AudioStream" uid="uid://mndp5miy4b8e" path="res://sounds/ambience.mp3" id="7_hj3sl"]
+[ext_resource type="AudioStream" uid="uid://oae7rxdctsuy" path="res://sounds/coin/pickup.mp3" id="7_p1m6y"]
+[ext_resource type="AudioStream" uid="uid://15twbfayenve" path="res://sounds/coin/pickup2.mp3" id="8_xj5gc"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_86ujc"]
-size = Vector2(3240, 2000)
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kjsgl"]
+streams_count = 2
+stream_0/stream = ExtResource("7_p1m6y")
+stream_1/stream = ExtResource("8_xj5gc")
 
-[sub_resource type="Gradient" id="Gradient_aojr1"]
-colors = PackedColorArray(0.921569, 0.921569, 0.921569, 1, 0.921569, 0.921569, 0.921569, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_unhlr"]
-gradient = SubResource("Gradient_aojr1")
-
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_axsq7"]
-stream_count = 2
-stream_0 = ExtResource("6_e6wyu")
-stream_1 = ExtResource("5_c2pxt")
-
-[node name="GameController" type="Node2D" node_paths=PackedStringArray("ui", "gacha_machine")]
+[node name="GameController" type="Node2D" node_paths=PackedStringArray("ui", "gacha_machine", "audio_coin")]
+position = Vector2(1920, 1080)
 script = ExtResource("1_4h8s8")
-ui = NodePath("CanvasLayer")
+ui = NodePath("UI")
 gacha_list = ExtResource("2_7jf06")
 gacha_machine = NodePath("GachaMachine")
+coin_scene = ExtResource("3_rh7ai")
+audio_coin = NodePath("CoinPurse/AudioStreamPlayer2D")
 
-[node name="CanvasLayer" parent="." instance=ExtResource("1_83iu1")]
+[node name="UI" parent="." instance=ExtResource("1_83iu1")]
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-mesh = SubResource("QuadMesh_86ujc")
-texture = SubResource("GradientTexture1D_unhlr")
+[node name="Background" type="TextureRect" parent="."]
+z_index = -100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1920.0
+offset_top = -1080.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_bmgos")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.880861, 0.941311, 0.953143, 0.745098)
+
+[node name="CoinPurse" parent="." instance=ExtResource("6_6in7d")]
+position = Vector2(1060, -100)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CoinPurse"]
+stream = SubResource("AudioStreamRandomizer_kjsgl")
 
 [node name="GachaMachine" parent="." instance=ExtResource("2_4dilj")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamPlaylist_axsq7")
+stream = ExtResource("6_e6wyu")
 autoplay = true
 
 [node name="Ambience" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_hj3sl")
 volume_db = -10.0
 autoplay = true
+
+[connection signal="input_event" from="CoinPurse" to="." method="_on_coin_purse_input_event"]

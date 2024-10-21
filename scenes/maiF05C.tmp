@@ -1,0 +1,45 @@
+[gd_scene load_steps=10 format=3 uid="uid://bpls863ho1na2"]
+
+[ext_resource type="Script" path="res://scenes/game_controller.gd" id="1_4h8s8"]
+[ext_resource type="PackedScene" uid="uid://bmvoe16fod6s1" path="res://scenes/UI.tscn" id="1_83iu1"]
+[ext_resource type="PackedScene" uid="uid://kwjhw0keyw5v" path="res://scenes/gacha_machine.tscn" id="2_4dilj"]
+[ext_resource type="JSON" path="res://scripts/test_list.json" id="2_jj2s6"]
+[ext_resource type="Texture2D" uid="uid://b2f5mp4xqh5xi" path="res://art/background.png" id="4_bmgos"]
+[ext_resource type="AudioStream" uid="uid://lub5y55pql82" path="res://sounds/beautiful_train.mp3" id="5_c2pxt"]
+[ext_resource type="AudioStream" uid="uid://2vje7dsq8fm0" path="res://sounds/coffee_beat.mp3" id="6_e6wyu"]
+[ext_resource type="AudioStream" uid="uid://mndp5miy4b8e" path="res://sounds/ambience.mp3" id="7_hj3sl"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_axsq7"]
+stream_count = 2
+stream_0 = ExtResource("6_e6wyu")
+stream_1 = ExtResource("5_c2pxt")
+
+[node name="GameController" type="Node2D" node_paths=PackedStringArray("ui", "gacha_machine")]
+script = ExtResource("1_4h8s8")
+ui = NodePath("CanvasLayer")
+gacha_list = ExtResource("2_jj2s6")
+gacha_machine = NodePath("GachaMachine")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("1_83iu1")]
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -1750.0
+offset_top = -1000.0
+offset_right = 1750.0
+offset_bottom = 1000.0
+texture = ExtResource("4_bmgos")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="GachaMachine" parent="." instance=ExtResource("2_4dilj")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamPlaylist_axsq7")
+autoplay = true
+
+[node name="Ambience" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_hj3sl")
+volume_db = -10.0
+autoplay = true
