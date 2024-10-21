@@ -108,19 +108,21 @@ mouse_filter = 2
 [node name="Credits" type="MarginContainer" parent="Theme/Game/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 128
-theme_override_constants/margin_top = 512
-theme_override_constants/margin_right = 128
-theme_override_constants/margin_bottom = 256
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 720
+theme_override_constants/margin_right = 256
+theme_override_constants/margin_bottom = 512
 
 [node name="Panel" type="Panel" parent="Theme/Game/HBoxContainer/Credits"]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Theme/Game/HBoxContainer/Credits/Panel"]
-layout_mode = 2
-offset_right = 821.0
-offset_bottom = 1032.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer"]
 layout_mode = 2
@@ -209,6 +211,7 @@ text = "COINS REMAINING"
 horizontal_alignment = 1
 
 [node name="RewardScreen" type="PanelContainer" parent="Theme"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -339,6 +342,7 @@ stream = ExtResource("10_i8dcv")
 volume_db = 10.0
 
 [node name="EndScreen" type="PanelContainer" parent="Theme"]
+visible = false
 z_index = 2
 clip_contents = true
 layout_mode = 1
@@ -383,6 +387,7 @@ stream = ExtResource("7_yn8xi")
 volume_db = 20.0
 
 [node name="StartScreen" type="PanelContainer" parent="Theme"]
+visible = false
 z_index = 2
 clip_contents = true
 layout_mode = 1
