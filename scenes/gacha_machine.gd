@@ -13,9 +13,9 @@ signal show_credits
 @export var ball_node: Node2D
 @export var knob: Area2D
 @export_category("Audio")
-@export var audio_knob_turn: AudioStreamPlayer2D
-@export var audio_knob_stop: AudioStreamPlayer2D
-@export var audio_coinslot: AudioStreamPlayer2D
+@export var audio_knob_turn: AudioStreamPlayer
+@export var audio_knob_stop: AudioStreamPlayer
+@export var audio_coinslot: AudioStreamPlayer
 
 var turning: bool = false
 var spawning: bool = false

@@ -4,7 +4,7 @@ extends Node2D
 @export var gacha_list: JSON
 @export var gacha_machine: GachaMachine
 @export var coin_scene: PackedScene
-@export var audio_coin: AudioStreamPlayer2D
+@export var audio_coin: AudioStreamPlayer
 
 var level_arrays: Array = []
 

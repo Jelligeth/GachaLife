@@ -18,10 +18,10 @@ signal start_over
 @export var end_screen: PanelContainer
 @export var end_list: VBoxContainer
 @export_category("Audio")
-@export var open_ball_audio: AudioStreamPlayer2D
-@export var lock_audio: AudioStreamPlayer2D
-@export var discard_audio: AudioStreamPlayer2D
-@export var win_audio: AudioStreamPlayer2D
+@export var open_ball_audio: AudioStreamPlayer
+@export var lock_audio: AudioStreamPlayer
+@export var discard_audio: AudioStreamPlayer
+@export var win_audio: AudioStreamPlayer
 
 func _ready() -> void:
 	reward_screen.hide()
@@ -89,3 +89,4 @@ func _on_restart_button_pressed() -> void:
 
 func _on_start_button_pressed() -> void:
 	win_audio.play()
+	#lock_audio.play()

@@ -24,7 +24,7 @@ ui = NodePath("UI")
 gacha_list = ExtResource("2_7jf06")
 gacha_machine = NodePath("GachaMachine")
 coin_scene = ExtResource("3_rh7ai")
-audio_coin = NodePath("CoinPurse/AudioStreamPlayer2D")
+audio_coin = NodePath("CoinAudio")
 
 [node name="UI" parent="." instance=ExtResource("1_83iu1")]
 
@@ -57,20 +57,20 @@ color = Color(0.880861, 0.941311, 0.953143, 0.745098)
 [node name="CoinPurse" parent="." instance=ExtResource("6_6in7d")]
 position = Vector2(1060, -100)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CoinPurse"]
-stream = SubResource("AudioStreamRandomizer_kjsgl")
-
 [node name="GachaMachine" parent="." instance=ExtResource("2_4dilj")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_e6wyu")
 autoplay = true
 
-[node name="Ambience" type="AudioStreamPlayer2D" parent="."]
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_hj3sl")
 volume_db = -10.0
 autoplay = true
+
+[node name="CoinAudio" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_kjsgl")
 
 [connection signal="input_event" from="CoinPurse" to="." method="_on_coin_purse_input_event"]

@@ -33,6 +33,21 @@ friction = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ngg7"]
 radius = 120.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rj8wl"]
+radius = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sc1v5"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcxjj"]
+size = Vector2(200, 250)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_meycg"]
+streams_count = 3
+stream_0/stream = ExtResource("13_kbkuw")
+stream_1/stream = ExtResource("14_pc7j1")
+stream_2/stream = ExtResource("15_mks63")
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mvamx"]
 streams_count = 3
 stream_0/stream = ExtResource("7_h36dy")
@@ -44,21 +59,6 @@ streams_count = 3
 stream_0/stream = ExtResource("10_t2qkh")
 stream_1/stream = ExtResource("11_7hpeo")
 stream_2/stream = ExtResource("12_ph3q8")
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_rj8wl"]
-radius = 80.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_meycg"]
-streams_count = 3
-stream_0/stream = ExtResource("13_kbkuw")
-stream_1/stream = ExtResource("14_pc7j1")
-stream_2/stream = ExtResource("15_mks63")
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_sc1v5"]
-radius = 50.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcxjj"]
-size = Vector2(200, 250)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t475f"]
 bg_color = Color(0.858824, 0.380392, 0.282353, 1)
@@ -79,9 +79,9 @@ machine = NodePath("Body")
 machine_label = NodePath("Body/PanelContainer/MarginContainer/MachineLabel")
 ball_node = NodePath("Body/Balls")
 knob = NodePath("Body/Knob")
-audio_knob_turn = NodePath("Body/Knob/HappyKnob")
-audio_knob_stop = NodePath("Body/Knob/UnhappyKnob")
-audio_coinslot = NodePath("Body/CoinHole/AudioStreamPlayer2D")
+audio_knob_turn = NodePath("Body/HappyKnob")
+audio_knob_stop = NodePath("Body/UnhappyKnob")
+audio_coinslot = NodePath("Body/CoinHoleAudio")
 
 [node name="Body" type="Sprite2D" parent="."]
 texture = ExtResource("1_bebtx")
@@ -134,24 +134,11 @@ polygon = PackedVector2Array(-84, -1, -69, -118, 88, -281, 187, -205, 239, -105,
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Knob"]
 shape = SubResource("CircleShape2D_7ngg7")
 
-[node name="HappyKnob" type="AudioStreamPlayer2D" parent="Body/Knob"]
-position = Vector2(0, -330)
-stream = SubResource("AudioStreamRandomizer_mvamx")
-volume_db = 10.0
-
-[node name="UnhappyKnob" type="AudioStreamPlayer2D" parent="Body/Knob"]
-position = Vector2(0, -330)
-stream = SubResource("AudioStreamRandomizer_vqlen")
-volume_db = 10.0
-
 [node name="CoinHole" type="Area2D" parent="Body"]
 position = Vector2(315, 235)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/CoinHole"]
 shape = SubResource("CircleShape2D_rj8wl")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Body/CoinHole"]
-stream = SubResource("AudioStreamRandomizer_meycg")
 
 [node name="ResetLevel" type="Area2D" parent="Body"]
 position = Vector2(318, 396)
@@ -195,6 +182,17 @@ theme_override_font_sizes/font_size = 30
 text = "credits"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CoinHoleAudio" type="AudioStreamPlayer" parent="Body"]
+stream = SubResource("AudioStreamRandomizer_meycg")
+
+[node name="HappyKnob" type="AudioStreamPlayer" parent="Body"]
+stream = SubResource("AudioStreamRandomizer_mvamx")
+volume_db = 10.0
+
+[node name="UnhappyKnob" type="AudioStreamPlayer" parent="Body"]
+stream = SubResource("AudioStreamRandomizer_vqlen")
+volume_db = 10.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Body"]
 offset_left = -450.0

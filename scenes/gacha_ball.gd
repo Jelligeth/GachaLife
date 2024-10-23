@@ -1,7 +1,7 @@
 extends RigidBody2D
 class_name Ball
 
-@export var audio: AudioStreamPlayer2D
+@export var audio: AudioStreamPlayer
 
 func _ready() -> void:
 	contact_monitor = true

@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cfrw3nykkilyl" path="res://art/half1.png" id="6_3na0x"]
 [ext_resource type="AudioStream" uid="uid://c36t50lpvck5n" path="res://sounds/lock.mp3" id="7_0k1jr"]
 [ext_resource type="AudioStream" uid="uid://e0tymq62s0q2" path="res://sounds/win.mp3" id="7_yn8xi"]
-[ext_resource type="AudioStream" uid="uid://b3uev3cy4mmrx" path="res://sounds/discard.wav" id="8_axprb"]
-[ext_resource type="AudioStream" uid="uid://c1terjn0fsr4c" path="res://sounds/ball/pop_open_1.wav" id="10_i8dcv"]
+[ext_resource type="AudioStream" uid="uid://dkdgcbrbm46m3" path="res://sounds/discard.mp3" id="8_26eml"]
+[ext_resource type="AudioStream" uid="uid://bwrdbyttvmqu" path="res://sounds/ball/pop_open_1.mp3" id="10_osndb"]
 [ext_resource type="PackedScene" uid="uid://d8cvbmyb61mv" path="res://scenes/background.tscn" id="11_iv72y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0ur3"]
@@ -42,10 +42,10 @@ discard_button = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBox
 restart_button = NodePath("Theme/EndScreen/VBoxContainer/ButtonRestart")
 end_screen = NodePath("Theme/EndScreen")
 end_list = NodePath("Theme/EndScreen/VBoxContainer/EndList")
-open_ball_audio = NodePath("Theme/RewardScreen/AudioStreamPlayer2D")
-lock_audio = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonLock/AudioStreamPlayer2D")
-discard_audio = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonDiscard/AudioStreamPlayer2D2")
-win_audio = NodePath("Theme/EndScreen/WinAudio")
+open_ball_audio = NodePath("Theme/Audio/PopOpenAudio")
+lock_audio = NodePath("Theme/Audio/LockItInAudio")
+discard_audio = NodePath("Theme/Audio/DiscardAudio")
+win_audio = NodePath("Theme/Audio/WinAudio")
 
 [node name="Theme" type="Control" parent="."]
 layout_mode = 3
@@ -211,7 +211,6 @@ text = "COINS REMAINING"
 horizontal_alignment = 1
 
 [node name="RewardScreen" type="PanelContainer" parent="Theme"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -219,7 +218,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="Theme/RewardScreen"]
 material = SubResource("ShaderMaterial_rcj0h")
@@ -317,32 +315,18 @@ size_flags_horizontal = 3
 text = "LOCK
 IT IN"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonLock"]
-stream = ExtResource("7_0k1jr")
-volume_db = 10.0
-
 [node name="ButtonDiscard" type="Button" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "THROW
 IT AWAY"
 
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonDiscard"]
-position = Vector2(-574, 0)
-stream = ExtResource("8_axprb")
-volume_db = 10.0
-
 [node name="TextureRect2" type="TextureRect" parent="Theme/RewardScreen/HboxContainer"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("6_3na0x")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Theme/RewardScreen"]
-stream = ExtResource("10_i8dcv")
-volume_db = 10.0
-
 [node name="EndScreen" type="PanelContainer" parent="Theme"]
-visible = false
 z_index = 2
 clip_contents = true
 layout_mode = 1
@@ -382,12 +366,7 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 80
 text = "THE END?"
 
-[node name="WinAudio" type="AudioStreamPlayer2D" parent="Theme/EndScreen"]
-stream = ExtResource("7_yn8xi")
-volume_db = 20.0
-
 [node name="StartScreen" type="PanelContainer" parent="Theme"]
-visible = false
 z_index = 2
 clip_contents = true
 layout_mode = 1
@@ -458,6 +437,31 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 80
 text = "BEGIN"
+
+[node name="Audio" type="Control" parent="Theme"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LockItInAudio" type="AudioStreamPlayer" parent="Theme/Audio"]
+stream = ExtResource("7_0k1jr")
+volume_db = 10.0
+
+[node name="WinAudio" type="AudioStreamPlayer" parent="Theme/Audio"]
+stream = ExtResource("7_yn8xi")
+volume_db = 10.0
+
+[node name="PopOpenAudio" type="AudioStreamPlayer" parent="Theme/Audio"]
+stream = ExtResource("10_osndb")
+volume_db = 10.0
+
+[node name="DiscardAudio" type="AudioStreamPlayer" parent="Theme/Audio"]
+stream = ExtResource("8_26eml")
+volume_db = 10.0
 
 [connection signal="pressed" from="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer/Button" to="Theme/Game/HBoxContainer/Credits/Panel" method="hide"]
 [connection signal="pressed" from="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonLock" to="." method="_on_button_lock_pressed"]
