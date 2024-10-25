@@ -84,8 +84,9 @@ func _on_restart_button_pressed() -> void:
 	var list = end_list.get_children()
 	for item in list:
 		item.queue_free()
+	lock_audio.play()
 	start_over.emit()
-	win_audio.play()
+
 
 func _on_start_button_pressed() -> void:
 	win_audio.play()

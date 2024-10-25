@@ -25,7 +25,8 @@ radius = 100.0
 size = Vector2(1024, 800)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4nx25"]
-friction = 0.1
+friction = 0.2
+rough = true
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7whlx"]
 friction = 0.0
@@ -113,7 +114,7 @@ texture = ExtResource("5_5nlxi")
 physics_material_override = SubResource("PhysicsMaterial_4nx25")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Guts"]
-polygon = PackedVector2Array(-394, 15, -463, -19, -490, -97, -492, -640, -416, -767, 414, -759, 479, -609, 495, -154, 482, -67, 428, 5, 98, 44, 117, 64, 201, 90, 271, 232, 250, 392, 148, 521, 40, 600, -88, 602, -171, 533, -203, 462, -166, 574, -194, 648, -248, 689, -348, 688, -302, 771, 573, 783, 588, -872, -619, -870, -593, 772, -306, 772, -355, 685, -419, 627, -427, 559, -387, 345, -250, 150, -124, 72, -122, 45)
+polygon = PackedVector2Array(-394, 15, -463, -19, -490, -97, -492, -640, -416, -767, 414, -759, 479, -609, 495, -154, 482, -67, 428, 5, 92, 72, 81, 96, 189, 142, 238, 252, 262, 404, 175, 520, 29, 572, -138, 547, -182, 446, -209, 460, -166, 574, -194, 648, -248, 689, -348, 688, -302, 771, 573, 783, 588, -872, -619, -870, -593, 772, -306, 772, -355, 685, -419, 627, -427, 559, -387, 345, -272, 139, -112, 98, -123, 72)
 
 [node name="Sprite2D" type="Sprite2D" parent="Body"]
 position = Vector2(0, 330)
@@ -121,6 +122,7 @@ texture = ExtResource("5_e1eh2")
 
 [node name="Knob" type="Area2D" parent="Body"]
 position = Vector2(0, 330)
+rotation = 1.44339
 
 [node name="Sprite2D" type="Sprite2D" parent="Body/Knob"]
 texture = ExtResource("6_wrmun")
@@ -129,7 +131,7 @@ texture = ExtResource("6_wrmun")
 physics_material_override = SubResource("PhysicsMaterial_7whlx")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body/Knob/KnobMechanism"]
-polygon = PackedVector2Array(-84, -1, -69, -118, 88, -281, 187, -205, 239, -105, 256, 62, 181, 166, 2, 226, -147, 178, -188, 56)
+polygon = PackedVector2Array(-89, 76, -57.7354, 7.65699, -86, -81, -127, -138, -76, -200, 2, -245, 68, -250, 187, -205, 239, -105, 256, 62, 181, 166, 2, 226, -132, 212, -178, 112)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Knob"]
 shape = SubResource("CircleShape2D_7ngg7")
@@ -221,8 +223,8 @@ text = "GACHA LIFE"
 [connection signal="body_entered" from="Body/Hole" to="." method="_on_hole_body_entered"]
 [connection signal="input_event" from="Body/Hole" to="." method="_on_hole_input_event"]
 [connection signal="input_event" from="Body/Cover/Window" to="." method="_on_window_input_event"]
-[connection signal="body_entered" from="Body/Knob" to="Body" method="_on_gacha_knob_body_entered"]
-[connection signal="body_exited" from="Body/Knob" to="Body" method="_on_gacha_knob_body_exited"]
+[connection signal="body_entered" from="Body/Knob" to="." method="_on_knob_body_entered"]
+[connection signal="body_exited" from="Body/Knob" to="." method="_on_knob_body_exited"]
 [connection signal="input_event" from="Body/Knob" to="." method="_on_gacha_knob_input_event"]
 [connection signal="input_event" from="Body/Knob" to="Body" method="_on_gacha_knob_input_event"]
 [connection signal="area_entered" from="Body/CoinHole" to="." method="_on_coin_hole_area_entered"]

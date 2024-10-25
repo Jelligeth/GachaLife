@@ -4,6 +4,7 @@ class_name GachaMachine
 signal turned_knob
 signal took_ball
 signal show_credits
+signal return_coin
 
 @export var ball_scene: PackedScene
 
@@ -22,6 +23,7 @@ var spawning: bool = false
 
 var ball_count: int = 0
 
+var has_ball: bool = false
 var got_ball: RigidBody2D
 
 var coin: Coin = null
@@ -66,11 +68,15 @@ func turn_knob() -> void:
 	turning = false
 
 func wiggle() -> void:
+	if turning:
+		return
+	turning = true
 	audio_knob_stop.play()
 	var original_rotation = knob.rotation
 	await tween_rotation(knob, original_rotation + 0.1, 0.05)
 	await tween_rotation(knob, original_rotation - 0.1, 0.1)
 	await tween_rotation(knob, original_rotation, 0.05)
+	turning = false
 
 func empty() -> void:
 	var balls = ball_node.get_children()
@@ -80,6 +86,8 @@ func empty() -> void:
 func reset_level() -> void:
 	if spawning: return
 	empty()
+	if paid or has_ball or got_ball:
+		return_coin.emit()
 	var tween = create_tween()
 	got_ball = null
 	turning = false
@@ -103,7 +111,7 @@ func tween_rotation(what, angle: float, time: float) -> void:
 
 func _on_gacha_knob_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not turning and event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		if paid:
+		if not got_ball and paid and (knob.rotation == 0 or (knob.rotation > 0 and has_ball)):
 			turn_knob()
 		else:
 			wiggle()
@@ -143,7 +151,14 @@ func _on_coin_hole_area_exited(area: Area2D) -> void:
 	if area is Coin:
 		coin = null
 
-
 func _on_window_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		shake()
+
+func _on_knob_body_entered(body: Node2D) -> void:
+	if body is Ball:
+		has_ball = true
+
+func _on_knob_body_exited(body: Node2D) -> void:
+	if body is Ball:
+		has_ball = false

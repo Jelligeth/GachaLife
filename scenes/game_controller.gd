@@ -21,6 +21,7 @@ func _ready() -> void:
 	level_arrays = gacha_list.data
 	gacha_machine.took_ball.connect(open_ball)
 	gacha_machine.show_credits.connect(show_credits)
+	gacha_machine.return_coin.connect(return_coin)
 	ui.lock_in.connect(lock_in)
 	ui.start_over.connect(reload)
 	ui.set_coins_text(coin_count)
@@ -85,6 +86,8 @@ func show_credits() -> void:
 func game_over(end: bool) -> void:
 	ui.end_game(end)
 
+func return_coin() -> void:
+	update_coin_count(1)
 
 func get_coin() -> void:
 	audio_coin.play()

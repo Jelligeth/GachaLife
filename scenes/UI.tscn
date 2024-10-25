@@ -453,7 +453,6 @@ volume_db = 10.0
 
 [node name="WinAudio" type="AudioStreamPlayer" parent="Theme/Audio"]
 stream = ExtResource("7_yn8xi")
-volume_db = 10.0
 
 [node name="PopOpenAudio" type="AudioStreamPlayer" parent="Theme/Audio"]
 stream = ExtResource("10_osndb")
