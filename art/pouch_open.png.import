@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2by78j7j76o5"
-path="res://.godot/imported/coin_large.png-ed2068263782a27a6d8189164c5e9c50.ctex"
+uid="uid://shfh5hf110lu"
+path="res://.godot/imported/pouch_open.png-3c36296a2001074d19a5ea0e4312403a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/coin_large.png"
-dest_files=["res://.godot/imported/coin_large.png-ed2068263782a27a6d8189164c5e9c50.ctex"]
+source_file="res://art/pouch_open.png"
+dest_files=["res://.godot/imported/pouch_open.png-3c36296a2001074d19a5ea0e4312403a.ctex"]
 
 [params]
 

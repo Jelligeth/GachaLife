@@ -1,15 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3e3ht82ddbxx"]
+[gd_scene load_steps=5 format=3 uid="uid://b3e3ht82ddbxx"]
 
-[ext_resource type="Texture2D" uid="uid://2by78j7j76o5" path="res://art/coin_large.png" id="1_11te6"]
+[ext_resource type="Texture2D" uid="uid://2by78j7j76o5" path="res://art/pouch_closed.png" id="1_11te6"]
+[ext_resource type="Script" uid="uid://c261ylkxiktn7" path="res://scenes/coin_purse.gd" id="1_nneia"]
+[ext_resource type="Texture2D" uid="uid://shfh5hf110lu" path="res://art/pouch_open.png" id="2_up4dj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c2v0l"]
-radius = 200.0
+radius = 373.74
 
-[node name="CoinPurse" type="Area2D"]
-position = Vector2(1200, 0)
+[node name="CoinPurse" type="Area2D" node_paths=PackedStringArray("open_sprite", "closed_sprite")]
+script = ExtResource("1_nneia")
+open_sprite = NodePath("Open")
+closed_sprite = NodePath("Closed")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_c2v0l")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Closed" type="Sprite2D" parent="."]
 texture = ExtResource("1_11te6")
+
+[node name="Open" type="Sprite2D" parent="."]
+texture = ExtResource("2_up4dj")

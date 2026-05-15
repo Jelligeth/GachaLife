@@ -35,7 +35,7 @@ friction = 0.0
 radius = 120.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rj8wl"]
-radius = 80.0
+radius = 60.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sc1v5"]
 radius = 50.0

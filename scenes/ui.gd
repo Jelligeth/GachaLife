@@ -24,6 +24,7 @@ signal start_over
 @export var win_audio: AudioStreamPlayer
 
 func _ready() -> void:
+	show()
 	reward_screen.hide()
 	credits.hide()
 	end_screen.hide()
@@ -51,7 +52,8 @@ func disable_discard_button(disabled: bool) -> void:
 
 func end_game(true_end: bool) -> void:
 	if true_end:
-		restart_button.hide()
+		pass
+		#restart_button.hide()
 	win_audio.play()
 	var list = element_list.get_children()
 	if list.size() == 1:

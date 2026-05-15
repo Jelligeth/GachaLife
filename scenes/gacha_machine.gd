@@ -5,6 +5,7 @@ signal turned_knob
 signal took_ball
 signal show_credits
 signal return_coin
+signal used_coin
 
 @export var ball_scene: PackedScene
 
@@ -141,14 +142,17 @@ func _on_coin_hole_input_event(_viewport: Node, event: InputEvent, _shape_idx: i
 		coin.queue_free()
 		coin = null
 		paid = true
+		used_coin.emit()
 
 
 func _on_coin_hole_area_entered(area: Area2D) -> void:
 	if area is Coin:
 		coin = area
+		coin.flip()
 
 func _on_coin_hole_area_exited(area: Area2D) -> void:
-	if area is Coin:
+	if area is Coin and coin:
+		coin.flip()
 		coin = null
 
 func _on_window_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

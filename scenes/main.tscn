@@ -17,11 +17,12 @@ streams_count = 2
 stream_0/stream = ExtResource("7_p1m6y")
 stream_1/stream = ExtResource("8_xj5gc")
 
-[node name="GameController" type="Node2D" node_paths=PackedStringArray("ui", "gacha_machine", "audio_coin")]
+[node name="GameController" type="Node2D" node_paths=PackedStringArray("ui", "gacha_machine", "coin_purse", "audio_coin")]
 script = ExtResource("1_4h8s8")
 ui = NodePath("UI")
 gacha_list = ExtResource("2_7jf06")
 gacha_machine = NodePath("GachaMachine")
+coin_purse = NodePath("CoinPurse")
 coin_scene = ExtResource("3_rh7ai")
 audio_coin = NodePath("CoinAudio")
 
@@ -54,7 +55,7 @@ grow_vertical = 2
 color = Color(0.880861, 0.941311, 0.953143, 0.745098)
 
 [node name="CoinPurse" parent="." instance=ExtResource("6_6in7d")]
-position = Vector2(1060, -100)
+position = Vector2(1175, -150)
 
 [node name="GachaMachine" parent="." instance=ExtResource("2_4dilj")]
 
@@ -71,5 +72,3 @@ autoplay = true
 
 [node name="CoinAudio" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_kjsgl")
-
-[connection signal="input_event" from="CoinPurse" to="." method="_on_coin_purse_input_event"]

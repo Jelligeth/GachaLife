@@ -32,16 +32,16 @@ shader_parameter/mix_percentage = 0.3
 script = ExtResource("1_s6qce")
 new_element_scene = ExtResource("2_ucv8m")
 start_screen = NodePath("Theme/StartScreen")
-credits = NodePath("Theme/Game/HBoxContainer/Credits/Panel")
-coins_text = NodePath("Theme/Game/HBoxContainer/Coins/MarginContainer/Reroll/Counter")
+credits = NodePath("Theme/Game/MarginContainer/HBoxContainer/Credits/Panel")
+coins_text = NodePath("Theme/Game/MarginContainer/HBoxContainer/Coins/MarginContainer/Reroll/Counter")
 reward_screen = NodePath("Theme/RewardScreen")
 reward_label = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/MarginContainer/Panel/MarginContainer/RewardLabel")
 reward_text = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/RewardText")
-element_list = NodePath("Theme/Game/HBoxContainer/LockedIn/VBoxContainer/MarginContainer2/LockedList")
+element_list = NodePath("Theme/Game/MarginContainer/HBoxContainer/LockedIn/VBoxContainer/MarginContainer2/LockedList")
 discard_button = NodePath("Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonDiscard")
-restart_button = NodePath("Theme/EndScreen/VBoxContainer/ButtonRestart")
+restart_button = NodePath("Theme/EndScreen/MarginContainer/VBoxContainer/ButtonRestart")
 end_screen = NodePath("Theme/EndScreen")
-end_list = NodePath("Theme/EndScreen/VBoxContainer/EndList")
+end_list = NodePath("Theme/EndScreen/MarginContainer/VBoxContainer/EndList")
 open_ball_audio = NodePath("Theme/Audio/PopOpenAudio")
 lock_audio = NodePath("Theme/Audio/LockItInAudio")
 discard_audio = NodePath("Theme/Audio/DiscardAudio")
@@ -66,31 +66,38 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Theme/Game"]
+[node name="MarginContainer" type="MarginContainer" parent="Theme/Game"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
 
-[node name="LockedIn" type="MarginContainer" parent="Theme/Game/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Theme/Game/MarginContainer"]
+layout_mode = 2
+
+[node name="LockedIn" type="MarginContainer" parent="Theme/Game/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="Theme/Game/HBoxContainer/LockedIn"]
+[node name="Panel" type="Panel" parent="Theme/Game/MarginContainer/HBoxContainer/LockedIn"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Theme/Game/HBoxContainer/LockedIn"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Theme/Game/MarginContainer/HBoxContainer/LockedIn"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Theme/Game/HBoxContainer/LockedIn/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Theme/Game/MarginContainer/HBoxContainer/LockedIn/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Theme/Game/HBoxContainer/LockedIn/VBoxContainer/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Theme/Game/MarginContainer/HBoxContainer/LockedIn/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
@@ -98,25 +105,25 @@ text = "LOCKED IN"
 fit_content = true
 autowrap_mode = 0
 
-[node name="MarginContainer2" type="MarginContainer" parent="Theme/Game/HBoxContainer/LockedIn/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Theme/Game/MarginContainer/HBoxContainer/LockedIn/VBoxContainer"]
 layout_mode = 2
 
-[node name="LockedList" type="VBoxContainer" parent="Theme/Game/HBoxContainer/LockedIn/VBoxContainer/MarginContainer2"]
+[node name="LockedList" type="VBoxContainer" parent="Theme/Game/MarginContainer/HBoxContainer/LockedIn/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Credits" type="MarginContainer" parent="Theme/Game/HBoxContainer"]
+[node name="Credits" type="MarginContainer" parent="Theme/Game/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 256
-theme_override_constants/margin_top = 720
+theme_override_constants/margin_top = 512
 theme_override_constants/margin_right = 256
-theme_override_constants/margin_bottom = 512
+theme_override_constants/margin_bottom = 420
 
-[node name="Panel" type="Panel" parent="Theme/Game/HBoxContainer/Credits"]
+[node name="Panel" type="Panel" parent="Theme/Game/MarginContainer/HBoxContainer/Credits"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Theme/Game/HBoxContainer/Credits/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,11 +131,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_r0ur3")
 
-[node name="Label" type="Label" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer/PanelContainer"]
+[node name="Label" type="Label" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.772549, 0.105882, 0.160784, 1)
 theme_override_colors/font_outline_color = Color(0.0980392, 0.203922, 0.52549, 1)
@@ -138,56 +145,56 @@ theme_override_font_sizes/font_size = 100
 text = "Credits"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Game and Art: Daoyi Liu"
 
-[node name="Label2" type="Label" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Sound: freesounds.org,
 zapsplat.com, dova-s.jp"
 
-[node name="Label3" type="Label" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label4" type="Label" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Made in Godot"
 
-[node name="Label5" type="Label" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label5" type="Label" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer"]
+[node name="Button" type="Button" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "CLOSE"
 
-[node name="Label" type="Label" parent="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer"]
 layout_mode = 2
 
-[node name="Coins" type="MarginContainer" parent="Theme/Game/HBoxContainer"]
+[node name="Coins" type="MarginContainer" parent="Theme/Game/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="Theme/Game/HBoxContainer/Coins"]
+[node name="Panel" type="Panel" parent="Theme/Game/MarginContainer/HBoxContainer/Coins"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Theme/Game/HBoxContainer/Coins"]
+[node name="MarginContainer" type="MarginContainer" parent="Theme/Game/MarginContainer/HBoxContainer/Coins"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/margin_bottom = 150
 
-[node name="Reroll" type="VBoxContainer" parent="Theme/Game/HBoxContainer/Coins/MarginContainer"]
+[node name="Reroll" type="VBoxContainer" parent="Theme/Game/MarginContainer/HBoxContainer/Coins/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -195,7 +202,7 @@ mouse_filter = 2
 theme_override_constants/separation = -50
 alignment = 1
 
-[node name="Counter" type="RichTextLabel" parent="Theme/Game/HBoxContainer/Coins/MarginContainer/Reroll"]
+[node name="Counter" type="RichTextLabel" parent="Theme/Game/MarginContainer/HBoxContainer/Coins/MarginContainer/Reroll"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -205,12 +212,13 @@ text = "30"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Label" type="Label" parent="Theme/Game/HBoxContainer/Coins/MarginContainer/Reroll"]
+[node name="Label" type="Label" parent="Theme/Game/MarginContainer/HBoxContainer/Coins/MarginContainer/Reroll"]
 layout_mode = 2
 text = "COINS REMAINING"
 horizontal_alignment = 1
 
 [node name="RewardScreen" type="PanelContainer" parent="Theme"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -299,7 +307,7 @@ mouse_filter = 2
 [node name="RewardText" type="Label" parent="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/MarginContainer/MarginContainer"]
 custom_minimum_size = Vector2(1024, 0)
 layout_mode = 2
-text = "This is what you got so I guess you should probably be happy about it"
+text = "This is what you got so you should probably be happy about it"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -339,34 +347,44 @@ grow_vertical = 2
 [node name="Background" parent="Theme/EndScreen" instance=ExtResource("11_iv72y")]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Theme/EndScreen"]
+[node name="MarginContainer" type="MarginContainer" parent="Theme/EndScreen"]
 layout_mode = 2
-theme_override_constants/separation = 50
-alignment = 1
+theme_override_constants/margin_left = 512
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 512
+theme_override_constants/margin_bottom = 128
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Theme/EndScreen/VBoxContainer"]
-clip_contents = false
+[node name="VBoxContainer" type="VBoxContainer" parent="Theme/EndScreen/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Theme/EndScreen/MarginContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 mouse_filter = 2
 text = "YOUR GACHA LIFE"
 fit_content = true
 autowrap_mode = 0
 
-[node name="EndList" type="VBoxContainer" parent="Theme/EndScreen/VBoxContainer"]
+[node name="EndList" type="VBoxContainer" parent="Theme/EndScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ButtonRestart" type="Button" parent="Theme/EndScreen/VBoxContainer"]
+[node name="ButtonRestart" type="Button" parent="Theme/EndScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 80
-text = "THE END?"
+text = "REPLAY"
 
 [node name="StartScreen" type="PanelContainer" parent="Theme"]
+visible = false
 z_index = 2
 clip_contents = true
 layout_mode = 1
@@ -462,9 +480,9 @@ volume_db = 10.0
 stream = ExtResource("8_26eml")
 volume_db = 10.0
 
-[connection signal="pressed" from="Theme/Game/HBoxContainer/Credits/Panel/VBoxContainer/Button" to="Theme/Game/HBoxContainer/Credits/Panel" method="hide"]
+[connection signal="pressed" from="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel/VBoxContainer/Button" to="Theme/Game/MarginContainer/HBoxContainer/Credits/Panel" method="hide"]
 [connection signal="pressed" from="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonLock" to="." method="_on_button_lock_pressed"]
 [connection signal="pressed" from="Theme/RewardScreen/HboxContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonDiscard" to="." method="_on_button_discard_pressed"]
-[connection signal="pressed" from="Theme/EndScreen/VBoxContainer/ButtonRestart" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Theme/EndScreen/MarginContainer/VBoxContainer/ButtonRestart" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="Theme/StartScreen/Instructions/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Theme/StartScreen/Instructions/StartButton" to="Theme/StartScreen" method="hide"]
