@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bpls863ho1na2"]
 
-[ext_resource type="Script" path="res://scenes/game_controller.gd" id="1_4h8s8"]
+[ext_resource type="Script" uid="uid://dchn0do0yr3dw" path="res://scenes/game_controller.gd" id="1_4h8s8"]
 [ext_resource type="PackedScene" uid="uid://bmvoe16fod6s1" path="res://scenes/UI.tscn" id="1_83iu1"]
 [ext_resource type="PackedScene" uid="uid://kwjhw0keyw5v" path="res://scenes/gacha_machine.tscn" id="2_4dilj"]
 [ext_resource type="JSON" path="res://scripts/gacha_list.json" id="2_7jf06"]
@@ -18,7 +18,6 @@ stream_0/stream = ExtResource("7_p1m6y")
 stream_1/stream = ExtResource("8_xj5gc")
 
 [node name="GameController" type="Node2D" node_paths=PackedStringArray("ui", "gacha_machine", "audio_coin")]
-position = Vector2(1920, 1080)
 script = ExtResource("1_4h8s8")
 ui = NodePath("UI")
 gacha_list = ExtResource("2_7jf06")

@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://bmvoe16fod6s1"]
 
 [ext_resource type="Theme" uid="uid://tiki8lc6ldfh" path="res://art/theme.tres" id="1_0xauf"]
-[ext_resource type="Script" path="res://scenes/ui.gd" id="1_s6qce"]
+[ext_resource type="Script" uid="uid://c5638vwj6hlvj" path="res://scenes/ui.gd" id="1_s6qce"]
 [ext_resource type="PackedScene" uid="uid://lmdujtfpll6q" path="res://scenes/list_element.tscn" id="2_ucv8m"]
 [ext_resource type="FontFile" uid="uid://1v3ervj5rdy8" path="res://art/zen_maru_gothic/ZenMaruGothic-Black.ttf" id="4_7dooy"]
-[ext_resource type="Shader" path="res://art/blur.gdshader" id="4_aggpe"]
+[ext_resource type="Shader" uid="uid://c56kj08yrdiya" path="res://art/blur.gdshader" id="4_aggpe"]
 [ext_resource type="Texture2D" uid="uid://b7j7inv6dfeci" path="res://art/half2.png" id="5_v5hej"]
 [ext_resource type="Texture2D" uid="uid://cfrw3nykkilyl" path="res://art/half1.png" id="6_3na0x"]
 [ext_resource type="AudioStream" uid="uid://c36t50lpvck5n" path="res://sounds/lock.mp3" id="7_0k1jr"]

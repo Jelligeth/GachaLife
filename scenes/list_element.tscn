@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://lmdujtfpll6q"]
 
-[ext_resource type="Script" path="res://scenes/list_element.gd" id="1_dsny7"]
+[ext_resource type="Script" uid="uid://c56qdh84l6ev6" path="res://scenes/list_element.gd" id="1_dsny7"]
 [ext_resource type="Texture2D" uid="uid://nbjytrs52v03" path="res://art/ball.png" id="2_cwyo7"]
 
 [node name="ListElement" type="HBoxContainer" node_paths=PackedStringArray("label")]
